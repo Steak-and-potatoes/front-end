@@ -111,3 +111,35 @@ Each of us will have our own branch to work on and then once we push it up we wi
 - Will you be using a PR review workflow?
 
 For a layer of security, we will have someone who didn't write the code double check. A minimum of 2 people will review.
+
+## Project Prep #2 Pitch Ideas
+
+**Just Juice**
+
+- The website gets profiles from recent purchases and we can add API's for legitimate purchases. The order sends email to user saving their recent juice purchases.
+- Stores users puchase history and provides owner with order and payment functionality.
+- Stores user info (profile, recent purchases, payment information). Allows user to complete purchase and owner to recieve payment and notification of purchase.
+
+**Evil Insult Meme Generator**
+
+- Meme generator that you can save to personal database and share over social media.
+- Something fun and funny to share with friends.
+- Meme, and authenticate user, save to database, and be able to share on social media.
+
+**Cocktail Jeeves**
+
+- Cocktail generator
+- Gives client ability to utilize ingredients they already have and the information to make the cocktail of their choice.
+- Supply ingredient and recieve list of cocktails, select one and save into database. Search by name, then choose random cocktail and supplies you with a page on how to make it.
+
+**Nerd News**
+
+- Supply daily NASA news feed for users to learn and comment on.
+- Networking and news updates.
+- Supplies daily NASA news to users and login profile ability to comment on news articles.
+
+**Manic Music Lover**
+
+- Pick a artist or band and find out interesting facts about them.
+- Finding out things about your favorite artists.
+- Look up any artist and revieve information about them. Login and save previous information and the ability to add and delete bands from your database.
