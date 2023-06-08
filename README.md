@@ -1,4 +1,8 @@
-#
+# Title Group Project
+
+### Authors
+
+Brandon Ruiz, Christina Hollie, Jacob Bassett, Rhett Beardemphl
 
 ## Cooperation
 
