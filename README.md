@@ -151,3 +151,5 @@ For a layer of security, we will have someone who didn't write the code double c
 - Meal creator by ingredients
 - Helps you to figure out what you can make based on ingredients you already have.
 - Creates a meal based on ingredients. Find recipe by name. Provides random meal.
+
+Go Chef Yourself website empowers all users to be their own chef and create meals with ingredients they have in their fridge and pantry.
