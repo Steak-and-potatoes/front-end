@@ -1,12 +1,19 @@
 
+import React from 'react';
+import Header from  './Header/Header.js';
+import Main from './Main/Main.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <p>boogers</p>
-    </div>
-  );
+export default class App extends React.Component {
+  render () {
+      return (
+        <div className="app-container">
+          <Header/>
+          <Main/>
+        </div>
+      );
+  }
 }
 
-export default App;
+
