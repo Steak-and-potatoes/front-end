@@ -143,3 +143,11 @@ For a layer of security, we will have someone who didn't write the code double c
 - Pick a artist or band and find out interesting facts about them.
 - Finding out things about your favorite artists.
 - Look up any artist and revieve information about them. Login and save previous information and the ability to add and delete bands from your database.
+
+# This is our project choice 
+
+**Go Chef Yourself**
+
+- Meal creator by ingredients
+- Helps you to figure out what you can make based on ingredients you already have.
+- Creates a meal based on ingredients. Find recipe by name. Provides random meal.
