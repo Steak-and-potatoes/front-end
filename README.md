@@ -1,4 +1,4 @@
-# Title Group Project
+# Go Chef Yourself
 
 ### Authors
 
