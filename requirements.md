@@ -38,7 +38,7 @@
 
 - Nutritional values for recipe meals, User can share recipes on their social media. Ability to print out the recipe. Search be recipe name.
 
-## Funtional Requirements
+## Functional Requirements
 
 **List of functionality**
 
