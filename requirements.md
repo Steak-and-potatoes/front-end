@@ -1,4 +1,4 @@
-# Software Requirments
+# Software Requirements
 
 ## Vision
 
