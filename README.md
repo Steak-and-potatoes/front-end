@@ -153,3 +153,18 @@ For a layer of security, we will have someone who didn't write the code double c
 - Creates a meal based on ingredients. Find recipe by name. Provides random meal.
 
 Go Chef Yourself website empowers all users to be their own chef and create meals with ingredients they have in their fridge and pantry.
+
+## Domain Model
+
+
+## Database Schema
+
+1. User Model
+
+- Contains the user name, email, and id number. This document will be used to filter all recipes down the users recipes.
+
+2. Recipe Model
+
+- Contains lots of information about each recipe. Most of this information will be displayed when the user selects the recipe to be displayed on the Recipe Page.
+
+![database schema](/images/database-img.png)
