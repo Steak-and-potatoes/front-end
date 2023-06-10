@@ -187,7 +187,7 @@ export default class Landing extends React.Component {
       .sort((a, b) => 0.5 - Math.random())
       .map((object, idx) => {
         return (
-          <Carousel.Item key={idx} interval={8000}>
+          <Carousel.Item key={idx} interval={`${20000*Math.random()}`}>
             <img
               className="d-block w-100 landing-image"
               src={require(`../../Images/${object.image}`)}
