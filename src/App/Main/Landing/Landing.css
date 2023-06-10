@@ -1,10 +1,11 @@
-.landing-container {
+.landing-carousel{
   border:2px solid black;
 }
 
 .landing-image {
   height:20vh;
   object-fit:cover;
+  background-color:black;
 }
 
 .right.carousel-control, .left.carousel-control {

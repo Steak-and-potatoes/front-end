@@ -135,11 +135,20 @@ export default class Landing extends React.Component {
     })
     return (
       <div className="landing-container">
-        <Carousel indicators={false} controls={false} fade>
+        <Carousel 
+          className="landing-carousel"
+          indicators={false} 
+          controls={false} 
+          fade>
 
             {imageElements}
     
         </Carousel>
+        <h3>Our Motivation:</h3>
+        <p>"No one is born a great cook, one learns by doing." - Julia Child</p>
+        <p>Welcome to our site! We built it to help you make meals from those delicious ingredients in your fridge. We hope they will nurture you and your loved ones.</p>
+        <h3>How it works:</h3>
+        <p>Navigate to the Search Page. Add one or more ingredients to the form and search for recipes that can use them. If a recipe catches your eye from the results, investigate it further on the Recipe Page. Login to save your favorite receipts and add notes to improve them. You can count on us to keep good care of your new cookbook for the next time you are hungry. :)</p>
       </div>
     );
   }
