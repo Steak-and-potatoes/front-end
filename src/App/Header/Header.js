@@ -4,14 +4,24 @@ import Container from "react-bootstrap/Container";
 import { Navbar, NavItem } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
-
-export default class Header extends React.Component {
+import LoginButton from './LoginButton/LoginButton.js';
+import LogOutButton from './LogOutButton/LogOutButton.js';
+import {withAuth0} from '@auth0/auth0-react';
+import {MdFoodBank} from 'react-icons/md';
+ 
+class Header extends React.Component {
   render() {
+    // console.log(this.props.auth0.isAuthenticated);
     return (
       <div className="header-container">
         <Navbar bg="light" expand="lg">
           <Container>
-            <Navbar.Brand href="#home">Go Chef Yourself!</Navbar.Brand>
+            <Navbar.Brand href="#home"><MdFoodBank/>Go Chef Yourself!</Navbar.Brand>
+
+            {this.props.auth0.isAuthenticated?
+              <LogOutButton/>:
+              <LoginButton/>}
+             
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
@@ -43,3 +53,5 @@ export default class Header extends React.Component {
     );
   }
 }
+
+export default withAuth0(Header);

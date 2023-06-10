@@ -5,8 +5,16 @@ import Search from './Search/Search.js';
 import Recipe from './Recipe/Recipe.js';
 import Profile from './Profile/Profile.js';
 import {Routes, Route} from 'react-router-dom';
+import {withAuth0} from "@auth0/auth0-react";
 
-export default class Main extends React.Component {
+class Main extends React.Component {
+  constructor(props){
+    super(props)
+    this.state={
+      recipeArray:[],
+    }
+  }
+
   render () {
       return (
         <div className="main-container">
@@ -20,3 +28,5 @@ export default class Main extends React.Component {
       );
   }
 }
+
+export default withAuth0(Main);
