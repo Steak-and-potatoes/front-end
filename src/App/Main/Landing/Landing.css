@@ -11,3 +11,7 @@
 .right.carousel-control, .left.carousel-control {
   display: none;
 }
+
+.copy-clipboard:hover {
+  color: red;
+}
