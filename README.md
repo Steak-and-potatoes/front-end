@@ -191,3 +191,5 @@ Go Chef Yourself website empowers all users to be their own chef and create meal
 - Contains lots of information about each recipe. Most of this information will be displayed when the user selects the recipe to be displayed on the Recipe Page.
 
 ![database schema](/images/database-img.png)
+
+
