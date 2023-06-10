@@ -1,3 +1,12 @@
 .landing-container {
-  outline:2px solid brown;
+  border:2px solid black;
+}
+
+.landing-image {
+  height:20vh;
+  object-fit:cover;
+}
+
+.right.carousel-control, .left.carousel-control {
+  display: none;
 }
