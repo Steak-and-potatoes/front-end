@@ -1,8 +1,7 @@
 import React from "react";
 import "./Landing.css";
-import Image from "react-bootstrap/Image";
 import Carousel from 'react-bootstrap/Carousel';
-import picture from '../../Images/alex-padurariu-mqyMjCTWJyQ-unsplash.jpg';
+
 
 const imagesArray = [
   {creator:"Alex Padurariu",
