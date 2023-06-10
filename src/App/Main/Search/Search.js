@@ -15,9 +15,16 @@ export default class Search extends React.Component {
   }
 
   handlerUpdateForm = (event) => {
-    // console.log(event.target.value);
     let {name,value}= event.target;
     this.setState({[name]:{text:value,display:true}});
+  }
+
+  handlerAddSearchField = () => {
+      if(!this.state.query2.display){
+        return this.setState({query2:{text:"",display:true}})
+      } else {
+        return this.setState({query3:{text:"",display:true}})
+      }
   }
 
   render() {
@@ -75,7 +82,7 @@ export default class Search extends React.Component {
           </Button>
           <Button 
             variant="primary" 
-            onClick={this.handlerAddField}>
+            onClick={this.handlerAddSearchField}>
             Add Ingredient
           </Button>
         
