@@ -2,7 +2,6 @@ import React from "react";
 import "./Landing.css";
 import Carousel from "react-bootstrap/Carousel";
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import {AiOutlineCopy} from 'react-icons/ai';
 
 const imagesArray = [
