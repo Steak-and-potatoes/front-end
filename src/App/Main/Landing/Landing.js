@@ -210,7 +210,7 @@ export default class Landing extends React.Component {
           {imageElements}
         </Carousel>
         <h3>Our Motivation:</h3>
-        <p>"No one is born a great cook, one learns by doing." - Julia Child</p>
+        <p>"The most indespensible ingredient of all good home cooking: love for those you are cooking for." - Sophia Loren</p>
         <p>
           Welcome to our site! We built it to help you make meals from those
           delicious ingredients in your fridge. We hope they will nurture you
