@@ -1,4 +1,4 @@
-# Title Group Project
+# Go Chef Yourself
 
 ### Authors
 
@@ -151,3 +151,43 @@ For a layer of security, we will have someone who didn't write the code double c
 - Meal creator by ingredients
 - Helps you to figure out what you can make based on ingredients you already have.
 - Creates a meal based on ingredients. Find recipe by name. Provides random meal.
+
+Go Chef Yourself website empowers all users to be their own chef and create meals with ingredients they have in their fridge and pantry.
+
+## User Stories
+
+1. As a user I would like to be able to search my favorite meal and get a full recipe.
+
+2. As a user I would like to be able to create my own profile where I can save my favorite recipes to view later.
+
+3. As a user I would like follow recipes that use the ingredients I have on hand so that I can save money.
+
+4. As a user I would like to view recipes either from my searches or from my database, so that I can have them available with needed.
+
+5. As a user I would like to update my recipes with helpful notes so that I can make my recipes my own.
+
+6. As a user I would like to share my recipes with friends so that I can share my passion with those I care about.
+
+## Wireframe
+
+![FigmaWireframe](/images/301Figma.png)
+![FigmaWireframe2](/images/301Figma2.png)
+![FigmaWireframe3](/images/301Figma3.png)
+![FigmaWireframe4](/images/301Figma4.png)
+![FigmaWireframe5](/images/301Figma5.png)
+
+## Domain Model
+
+![DomainModel](/images/301FianllabSchemaBoxs.png)
+
+## Database Schema
+
+1. User Model
+
+- Contains the user name, email, and id number. This document will be used to filter all recipes down the users recipes.
+
+2. Recipe Model
+
+- Contains lots of information about each recipe. Most of this information will be displayed when the user selects the recipe to be displayed on the Recipe Page.
+
+![database schema](/images/database-img.png)
