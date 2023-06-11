@@ -198,7 +198,7 @@ export default class Landing extends React.Component {
         );
       });
 
-    console.log(this.state.creatorObject);
+    // console.log(this.state.creatorObject);
     return (
       <div className="landing-container">
         <Carousel
