@@ -5,6 +5,7 @@ import { FaMinus } from "react-icons/fa";
 import { nanoid } from "nanoid";
 import axios from 'axios';
 import ErrorModal from '../ErrorModal/ErrorModal.js';
+import Accordion from 'react-bootstrap/Accordion';
 import "./Search.css";
 import static_byIngredientsArray from '../../../Data/data-multiple-ingredients.json';
 
@@ -15,12 +16,11 @@ export default class Search extends React.Component {
     super(props);
     this.state = {
       queryNumber: 2,
-      searchByIngredients: [{ query: `${nanoid()}`, text: "Chicken" },{ query: `${nanoid()}`, text: "Butter" }],
-      
+      searchByIngredients: [{ query: `${nanoid()}`, text: "Beef" },{ query: `${nanoid()}`, text: "" }],
+
       byIngredientsArray:static_byIngredientsArray,
 
-      displayError:false,
-      error:null
+      accordionKey:null
     };
   }
 
@@ -71,22 +71,28 @@ export default class Search extends React.Component {
       let regex = /[0-9\W]/g;
       let arrayQueries = this.state.searchByIngredients.filter(object => (object.text!=="" && !regex.test(object.text))).reduce((acc,b)=>{acc.push(b.text.toLowerCase());return acc;},[]);
       if (arrayQueries.length===0){
-        this.setState({displayError:true,error:"Must submit one or more ingredients without any digits(123) or special characters(%$&*)."})
+        this.props.handlerUpdateError(true,"Must submit one or more ingredients without any digits(123) or special characters(%$&*).")
       } else {
         let queryString = arrayQueries.map((query,idx) => `ing${idx+1}=${query}`).join("&")
         let url = `${SERVER}/options?${queryString}`
         
         axios.get(url)
-          .then(res => this.setState({displayError:false,byIngredientsArray:res.data.meals}))
-          .catch(error => this.setState({displayError:true,error:error.message}))
+          .then(res => {
+            if(res.data.meals===null){
+              this.setState({byIngredientsArray:[]})
+            } else {
+              this.props.handlerUpdateError(false,null)
+              this.setState({byIngredientsArray:res.data.meals})}})
+          .catch(error => this.props.handlerUpdateError(true,error.message))
       }
     } catch (error) {
-      this.setState({displayError:true,error:error.message})
+      this.props.handlerUpdateError(true,error.message)
     }
   }
 
   render() {
-    console.log(this.state.byIngredientsArray);
+    // console.log(this.state.byIngredientsArray);
+
     let formGroups = this.state.searchByIngredients.map((object, idx) => {
       return (
         <Form.Group key={idx} className="mb-3" controlId={object.query}>
@@ -101,27 +107,50 @@ export default class Search extends React.Component {
         </Form.Group>
       );
     });
+
+    let accordionItems = this.state.byIngredientsArray.map((recipe,idx) =>{
+      return <Accordion.Item 
+                key={idx}
+                eventKey={idx}>
+                <Accordion.Header
+                  onClick={()=>this.setState({accordionKey:idx})}
+                  >{recipe.strMeal}</Accordion.Header>
+                  <Accordion.Body>
+                    <img
+                      src={recipe.strMealThumb}
+                      alt={recipe.strMeal}
+                      />
+                    <Button
+                      onClick={()=>this.props.handlerUpdateFullRecipeID(recipe.idMeal)}
+                      >View Full Recipe</Button>
+                    </Accordion.Body>
+                </Accordion.Item>
+    })
+
     return (
       <div className="search-container">
 
-        <ErrorModal 
-          error={this.state.error}
-          displayError={this.state.displayError} 
-          handlerClearError={()=>this.setState({displayError:false,error:null})} />
-
         <h4>Enter one ingredient per search field and click submit.</h4>
         <Form 
-          onSubmit={this.handlerOnSubmit}>
-          {formGroups}
-          <Button 
-            variant="primary" 
-            type="submit">
-            Search
-          </Button>
-          <Button variant="primary" onClick={this.handlerAddSearchField}>
-            Add Ingredient
-          </Button>
-        </Form>
+            onSubmit={this.handlerOnSubmit}>
+            {formGroups}
+            <Button 
+              variant="primary" 
+              type="submit">
+              Search
+            </Button>
+            <Button variant="primary" onClick={this.handlerAddSearchField}>
+              Add Ingredient
+            </Button>
+          </Form>
+
+          {this.state.byIngredientsArray.length!==0?
+                <Accordion
+                  defaultActiveKey={this.state.accordionKey}>
+                  {accordionItems}
+                </Accordion>:
+            null
+          }
       </div>
     );
   }
