@@ -16,7 +16,7 @@ class Header extends React.Component {
       <div className="header-container">
         <Navbar bg="light" expand="lg">
           <Container>
-            <Navbar.Brand href="#home"><MdFoodBank/>Go Chef Yourself!</Navbar.Brand>
+            <Navbar.Brand><MdFoodBank/>Go Chef Yourself!</Navbar.Brand>
 
             {this.props.auth0.isAuthenticated?
               <LogOutButton/>:

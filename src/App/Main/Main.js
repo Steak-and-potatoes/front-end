@@ -25,12 +25,11 @@ class Main extends React.Component {
 
   handlerUpdateFullRecipeId = (id) => {
     if(id!==this.state.fullRecipeID){
-      this.setState({fullRecipeID:id});
       let url = `${SERVER}/recipe?id=${id}`;
 
       axios.get(url)
         .then(res => {
-          this.setState({fullRecipe:res.data,displayError:false,error:null})
+          this.setState({fullRecipeID:id,fullRecipe:res.data,displayError:false,error:null})
         })
         .catch(err => this.handlerUpdateError(true,err.message))
     }
@@ -44,10 +43,10 @@ class Main extends React.Component {
       // console.log(this.state.fullRecipe);
       return (
         <div className="main-container">
-            <ErrorModal 
-              error={this.state.error}
-              displayError={this.state.displayError} 
-              handlerUpdateError={()=>this.handlerUpdateError(false,null)} />
+          <ErrorModal 
+            displayError={this.state.displayError} 
+            error={this.state.error}
+            handlerUpdateError={()=>this.handlerUpdateError(false,null)} />
           <Routes>
             <Route exact path="/" element={<Landing/>}/>
             <Route exact path="/search" element={
@@ -58,7 +57,9 @@ class Main extends React.Component {
               <Recipe 
                 fullRecipe={this.state.fullRecipe}
                 handlerUpdateError={this.handlerUpdateError}/>}/>
-            <Route exact path="/profile" element={<Profile/>}/>
+            <Route exact path="/profile" element={
+              <Profile
+                />}/>
           </Routes>
         </div>
       );

@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { FaMinus } from "react-icons/fa";
 import { nanoid } from "nanoid";
 import axios from 'axios';
-import ErrorModal from '../ErrorModal/ErrorModal.js';
+// import ErrorModal from '../ErrorModal/ErrorModal.js';
 import Accordion from 'react-bootstrap/Accordion';
 import "./Search.css";
 import static_byIngredientsArray from '../../../Data/data-multiple-ingredients.json';
