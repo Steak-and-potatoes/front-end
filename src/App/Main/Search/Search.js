@@ -4,10 +4,9 @@ import Form from "react-bootstrap/Form";
 import { FaMinus } from "react-icons/fa";
 import { nanoid } from "nanoid";
 import axios from 'axios';
-// import ErrorModal from '../ErrorModal/ErrorModal.js';
-import Accordion from 'react-bootstrap/Accordion';
 import "./Search.css";
 import static_byIngredientsArray from '../../../Data/data-multiple-ingredients.json';
+import RecipesAccordion from '../RecipesAccordion/RecipesAccordion.js';
 
 let SERVER = process.env.REACT_APP_SERVER;
 
@@ -89,6 +88,11 @@ export default class Search extends React.Component {
       this.props.handlerUpdateError(true,error.message)
     }
   }
+  
+  handlerUpdateAccordionKey = (idx) => {
+    this.setState({accordionKey:idx});
+  }
+
 
   render() {
     // console.log(this.state.byIngredientsArray);
@@ -108,25 +112,6 @@ export default class Search extends React.Component {
       );
     });
 
-    let accordionItems = this.state.byIngredientsArray.map((recipe,idx) =>{
-      return <Accordion.Item 
-                key={idx}
-                eventKey={idx}>
-                <Accordion.Header
-                  onClick={()=>this.setState({accordionKey:idx})}
-                  >{recipe.strMeal}</Accordion.Header>
-                  <Accordion.Body>
-                    <img
-                      src={recipe.strMealThumb}
-                      alt={recipe.strMeal}
-                      />
-                    <Button
-                      onClick={()=>this.props.handlerUpdateFullRecipeID(recipe.idMeal)}
-                      >View Full Recipe</Button>
-                    </Accordion.Body>
-                </Accordion.Item>
-    })
-
     return (
       <div className="search-container">
 
@@ -145,10 +130,13 @@ export default class Search extends React.Component {
           </Form>
 
           {this.state.byIngredientsArray.length!==0?
-                <Accordion
-                  defaultActiveKey={this.state.accordionKey}>
-                  {accordionItems}
-                </Accordion>:
+                <RecipesAccordion
+                  type='search'
+                  defaultActiveKey={this.state.accordionKey}
+                  recipesArray={this.state.byIngredientsArray}
+                  handlerFullRecipe={this.props.handlerFullRecipe}
+                  handlerUpdateAccordionKey={this.handlerUpdateAccordionKey}
+                />:
             null
           }
       </div>

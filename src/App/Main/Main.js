@@ -23,24 +23,27 @@ class Main extends React.Component {
     }
   }
 
-  handlerUpdateFullRecipeId = (id) => {
-    if(id!==this.state.fullRecipeID){
-      let url = `${SERVER}/recipe?id=${id}`;
-
-      axios.get(url)
-        .then(res => {
-          this.setState({fullRecipeID:id,fullRecipe:res.data,displayError:false,error:null})
-        })
-        .catch(err => this.handlerUpdateError(true,err.message))
-    }
+  handlerFullRecipe = (id,object=null) => {
+    if(id!==this.state.fullRecipeID && object===null){
+          let url = `${SERVER}/recipe?id=${id}`;
+          axios.get(url)
+            .then(res => {
+              this.setState({fullRecipeID:id,fullRecipe:res.data,displayError:false,error:null})
+            })
+            .catch(err => this.handlerUpdateError(true,err.message))
+      }
+    if (id!==this.state.fullRecipeID && object) {
+        this.setState({fullRecipe:object})
+      }
   }
+  
 
   handlerUpdateError = (bool,errorMessage=null) => {
     this.setState({displayError:bool,error:errorMessage})
   }
 
   render () {
-      // console.log(this.state.fullRecipe);
+      console.log(this.state.fullRecipe);
       return (
         <div className="main-container">
           <ErrorModal 
@@ -51,7 +54,7 @@ class Main extends React.Component {
             <Route exact path="/" element={<Landing/>}/>
             <Route exact path="/search" element={
               <Search 
-                handlerUpdateFullRecipeID={this.handlerUpdateFullRecipeId}
+                handlerFullRecipe={this.handlerFullRecipe}
                 handlerUpdateError={this.handlerUpdateError}/>}/>
             <Route exact path="/recipe" element={
               <Recipe 
@@ -59,6 +62,7 @@ class Main extends React.Component {
                 handlerUpdateError={this.handlerUpdateError}/>}/>
             <Route exact path="/profile" element={
               <Profile
+                handlerFullRecipe={this.handlerFullRecipe}
                 />}/>
           </Routes>
         </div>
