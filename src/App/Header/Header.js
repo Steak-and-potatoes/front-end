@@ -25,7 +25,7 @@ class Header extends React.Component {
               <Nav className="me-auto">
                 <NavItem>
                   <Link to="/" className="nav-link">
-                    About
+                    Home
                   </Link>
                 </NavItem>
                 <NavItem>
