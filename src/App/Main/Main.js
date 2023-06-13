@@ -9,6 +9,7 @@ import axios from 'axios';
 import ErrorModal from './ErrorModal/ErrorModal.js';
 import static_fullRecipe from '../../Data/data-by-id.json';
 import {useNavigate} from 'react-router-dom';
+import AttributionModal from './AttributionModal/AttributionModal.js';
 
 let SERVER = process.env.REACT_APP_SERVER;
 
@@ -19,6 +20,9 @@ function Main() {
     fullRecipe:static_fullRecipe,
     displayError:false,
     error:null,
+    displayProfileCard:true,
+    displayAttribution:false,
+    attributionObject:{}
   });
 
   let navigate = useNavigate();
@@ -28,13 +32,14 @@ function Main() {
           let url = `${SERVER}/recipe?id=${id}`;
           axios.get(url)
             .then(res => {
-              console.log(res.data)
+              // console.log(res.data.email)
               navigate('/recipe');
               setState({fullRecipeID:id,fullRecipe:res.data,displayError:false,error:null});
             })
             .catch(err => handlerUpdateError(true,err.message))
       }
     if (id!==state.fullRecipeID && object) {
+        navigate('/recipe');
         setState({fullRecipe:object})
       }
   }
@@ -43,27 +48,46 @@ function Main() {
     setState({displayError:bool,error:errorMessage})
   }
 
+  function handlerUpdateProfileCard(bool) {
+    setState({displayProfileCard:bool});
+  }
+
+  function handlerAttribution(object, bool) {
+    setState({ attributionObject:object,displayAttribution: bool });
+  };
+
   return (
     <div className="main-container">
-      <ErrorModal 
-        displayError={state.displayError} 
-        error={state.error}
-        handlerUpdateError={()=>handlerUpdateError(false,null)} />
+            <AttributionModal
+              displayAttribution={state.displayAttribution}
+              attributionObject={state.attributionObject}
+              handlerAttribution={handlerAttribution}
+            />
+            <ErrorModal 
+              displayError={state.displayError} 
+              error={state.error}
+              handlerUpdateError={()=>handlerUpdateError(false,null)} />
       <Routes>
-        <Route exact path="/" element={<Landing/>}/>
-        <Route exact path="/search" element={
-          <Search 
-            handlerFullRecipe={handlerFullRecipe}
-            handlerUpdateError={handlerUpdateError}/>}/>
-        <Route exact path="/recipe" element={
-          <Recipe 
-            fullRecipe={state.fullRecipe}
-            handlerUpdateError={handlerUpdateError}/>}/>
-        <Route exact path="/profile" element={
-          <Profile
-            handlerFullRecipe={handlerFullRecipe}
-            handlerUpdateError={handlerUpdateError}
+        <Route exact path="/" element={
+            <Landing
+              handlerAttribution={handlerAttribution}
             />}/>
+        <Route exact path="/search" element={
+            <Search 
+              handlerFullRecipe={handlerFullRecipe}
+              handlerUpdateError={handlerUpdateError}/>}/>
+        <Route exact path="/recipe" element={
+            <Recipe 
+              fullRecipe={state.fullRecipe}
+              handlerUpdateError={handlerUpdateError}/>}/>
+        <Route exact path="/profile" element={
+            <Profile
+              displayProfileCard={state.displayProfileCard}
+              handlerUpdateProfileCard={handlerUpdateProfileCard}
+              handlerAttribution={handlerAttribution}
+              handlerFullRecipe={handlerFullRecipe}
+              handlerUpdateError={handlerUpdateError}
+              />}/>
       </Routes>
     </div>
   )

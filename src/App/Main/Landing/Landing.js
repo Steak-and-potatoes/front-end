@@ -172,15 +172,10 @@ export default class Landing extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showImageAttribution: false,
-      creatorObject: {},
       copyColor:'black'
     };
   }
 
-  handlerImageAttribution = (object, bool,color) => {
-    this.setState({ creatorObject:object,showImageAttribution: bool, copyColor:color });
-  };
 
   render() {
     let imageElements = imagesArray
@@ -192,13 +187,13 @@ export default class Landing extends React.Component {
               className="d-block w-100 landing-image"
               src={require(`../../Images/${object.image}`)}
               alt={object.creator}
-              onClick={() => this.handlerImageAttribution(object, true)}
+              onClick={() => this.props.handlerAttribution(object, true)}
             />
           </Carousel.Item>
         );
       });
 
-    // console.log(this.state.creatorObject);
+
     return (
       <div className="landing-container">
         <Carousel
@@ -225,30 +220,6 @@ export default class Landing extends React.Component {
           count on us to keep good care of your new cookbook for the next time
           you are hungry. :)
         </p>
-
-        <Modal 
-          show={this.state.showImageAttribution} 
-          onHide={()=>this.handlerImageAttribution({},false,'black')}>
-          <Modal.Header closeButton>
-            <Modal.Title>{`Photographer's Name: ${this.state.creatorObject.creator}`}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {this.state.showImageAttribution&&
-              <img
-                className="d-block w-100"
-                src={require(`../../Images/${this.state.creatorObject.image}`)}
-                alt={this.state.creatorObject.creator}
-              />}
-            <p>Find more of their work here.<br/>{`${this.state.creatorObject.link} `}
-            <AiOutlineCopy 
-              style={{color:this.state.copyColor}}
-              className="copy-clipboard"
-              onClick={()=>{
-                navigator.clipboard.writeText(this.state.creatorObject.link);
-                this.setState({copyColor:'red'});
-                }}/></p>
-          </Modal.Body>
-        </Modal>
       </div>
     );
   }
