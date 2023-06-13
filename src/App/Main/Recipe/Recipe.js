@@ -8,7 +8,7 @@ export default class Recipe extends React.Component {
     this.state={}
   }
   render () {
-      console.log(this.props.fullRecipe);
+      // console.log(this.props.fullRecipe);
       return (
         <div className="recipe-container">
       <Carousel>

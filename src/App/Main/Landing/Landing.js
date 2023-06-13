@@ -172,15 +172,10 @@ export default class Landing extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showImageAttribution: false,
-      creatorObject: {},
-      copyColor: 'black'
+      copyColor:'black'
     };
   }
 
-  handlerImageAttribution = (object, bool, color) => {
-    this.setState({ creatorObject: object, showImageAttribution: bool, copyColor: color });
-  };
 
   render() {
     let imageElements = imagesArray
@@ -192,13 +187,13 @@ export default class Landing extends React.Component {
               className="d-block w-100 landing-image"
               src={require(`../../Images/${object.image}`)}
               alt={object.creator}
-              onClick={() => this.handlerImageAttribution(object, true)}
+              onClick={() => this.props.handlerAttribution(object, true)}
             />
           </Carousel.Item>
         );
       });
 
-    // console.log(this.state.creatorObject);
+
     return (
       <div className="landing-container">
         <Carousel
@@ -210,47 +205,23 @@ export default class Landing extends React.Component {
           {imageElements}
         </Carousel>
         <div className="mission">
-          <h3>Our Motivation:</h3>
-          <p>"The most indespensible ingredient of all good home cooking: love for those you are cooking for." - Sophia Loren</p>
-          <p>
-            Welcome to our site! We built it to help you make meals from those
-            delicious ingredients in your fridge. We hope they will nurture you
-            and your loved ones.
-          </p>
-          <h3>How it works:</h3>
-          <p>
-            Navigate to the Search Page. Add one or more ingredients to the form
-            and search for recipes that can use them. If a recipe catches your eye
-            from the results, investigate it further on the Recipe Page. Login to
-            save your favorite receipts and add notes to improve them. You can
-            count on us to keep good care of your new cookbook for the next time
-            you are hungry. :)
-          </p>
+        <h3>Our Motivation:</h3>
+        <p>"The most indespensible ingredient of all good home cooking: love for those you are cooking for." - Sophia Loren</p>
+        <p>
+          Welcome to our site! We built it to help you make meals from those
+          delicious ingredients in your fridge. We hope they will nurture you
+          and your loved ones.
+        </p>
+        <h3>How it works:</h3>
+        <p>
+          Navigate to the Search Page. Add one or more ingredients to the form
+          and search for recipes that can use them. If a recipe catches your eye
+          from the results, investigate it further on the Recipe Page. Login to
+          save your favorite receipts and add notes to improve them. You can
+          count on us to keep good care of your new cookbook for the next time
+          you are hungry. :)
+        </p>
         </div>
-
-        <Modal
-          show={this.state.showImageAttribution}
-          onHide={() => this.handlerImageAttribution({}, false, 'black')}>
-          <Modal.Header closeButton>
-            <Modal.Title>{`Photographer's Name: ${this.state.creatorObject.creator}`}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {this.state.showImageAttribution &&
-              <img
-                className="d-block w-100"
-                src={require(`../../Images/${this.state.creatorObject.image}`)}
-                alt={this.state.creatorObject.creator}
-              />}
-            <p>Find more of their work here.<br />{`${this.state.creatorObject.link} `}
-              <AiOutlineCopy
-                style={{ color: this.state.copyColor }}
-                className="copy-clipboard"
-                onClick={() => {
-                  navigator.clipboard.writeText(this.state.creatorObject.link);
-                  this.setState({ copyColor: 'red' });
-                }} /></p>
-          </Modal.Body>
-        </Modal>
       </div>
     );
   }

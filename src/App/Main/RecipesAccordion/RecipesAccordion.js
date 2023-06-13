@@ -34,8 +34,10 @@ export default class RecipeAccorion extends React.Component {
                   eventKey={idx}>
                   <Accordion.Header
                     onClick={()=>this.props.handlerUpdateAccordionKey(idx)}
-                    >{`${recipe.strMeal}, Origins: ${recipe.strArea||'Undefined'}, Categories: ${recipe.strTags||'Undefined'}`}</Accordion.Header>
+                    >{`${recipe.strMeal||'unavailable'}`}</Accordion.Header>
                     <Accordion.Body>
+                      <p>{`Origins: ${recipe.strArea||'unavailable'}`}</p>
+                      <p>{`Tags: ${recipe.strTags||'unavailable'}`}</p>
                       <img
                         src={recipe.strMealThumb}
                         alt={recipe.strMeal}
