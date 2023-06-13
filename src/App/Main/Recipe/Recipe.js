@@ -9,6 +9,8 @@ export default class Recipe extends React.Component {
     super(props);
     this.state={oneRecipe : this.props.fullRecipe}
   }
+
+  
   render () {
       console.log(this.props.fullRecipe);
       return (
@@ -18,11 +20,33 @@ export default class Recipe extends React.Component {
     <Card.Body>
       <Card.Title>{this.props.fullRecipe.strMeal}</Card.Title>
       <Card.Text>
-        {Object.values(this.state.oneRecipe).map((value, index) => (
-          <ul key={index}>{value}</ul>
+      {Object.entries(this.state.oneRecipe).map(([key, value]) => {
+  if (key !== "strTags" && key!== "idMeal" && key!== "strCategory" && key!== "strYoutube" && key!=="strMealThumb" && key!=="arrayIngredients") {
+    return (
+      <ul key={key}>
+        <strong>{key}:</strong> {value}
+      </ul>
+    );
+  }
+  
+  return null;
+})}
+{Object.entries(this.state.oneRecipe).map(([key, value]) => {
+  if (key === "arrayIngredients") {
+    return (
+      <ul key={key}>
+        <strong>{key}:</strong>
+        {value.map((item, index) => (
+          <li key={index}>{item}</li>
         ))}
+      </ul>
+    );
+  }
+ 
+})}
       </Card.Text>
-      <Button variant="primary">Edit Recipe</Button>
+      <Button variant="primary">Edit Recipe</Button> 
+      <Button variant="primary" style={{ marginLeft: '15px' }}>Youtube</Button>
       <Button variant="secondary" style={{ marginLeft: '15px' }}>Save Recipe</Button>
     </Card.Body>
   </Card>
