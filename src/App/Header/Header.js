@@ -13,9 +13,7 @@ class Header extends React.Component {
   render() {
     // console.log(this.props.auth0.isAuthenticated);
     return (
-      <div className="header-container">
         <Navbar bg="light" expand="lg">
-          <Container>
             <Navbar.Brand><MdFoodBank/>Go Chef Yourself!</Navbar.Brand>
 
             {this.props.auth0.isAuthenticated?
@@ -47,9 +45,7 @@ class Header extends React.Component {
                 </NavItem>
               </Nav>
             </Navbar.Collapse>
-          </Container>
         </Navbar>
-      </div>
     );
   }
 }
