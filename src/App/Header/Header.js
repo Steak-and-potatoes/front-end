@@ -38,11 +38,14 @@ class Header extends React.Component {
                     Recipe
                   </Link>
                 </NavItem>
-                <NavItem>
-                  <Link to="/profile" className="nav-link">
-                    Profile
-                  </Link>
-                </NavItem>
+                {this.props.auth0.isAuthenticated?
+                  <NavItem>
+                    <Link to="/profile" className="nav-link">
+                      Profile
+                    </Link>
+                  </NavItem>:
+                  null
+                  }
               </Nav>
             </Navbar.Collapse>
         </Navbar>

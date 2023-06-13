@@ -3,13 +3,6 @@ import './ProfileCard.css'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-const catImageAttribution = 
-  {
-    creator: "Amber Kipp",
-    image: "amber-kipp-75715CVEJhI-unsplash.jpg",
-    link: "https://unsplash.com/@sadmax",
-  };
-
 class ProfileCard extends React.Component {
   constructor(props){
     super(props);
@@ -23,15 +16,10 @@ class ProfileCard extends React.Component {
           {this.props.displayProfileCard?
 
           <Card style={{ width: '18rem' }}>
-            {this.props.username==="Chef Whiskers"?
               <Card.Img 
                 variant="top" 
-                src={this.props.userPicture} 
-                onClick={()=>this.props.handlerAttribution(catImageAttribution,true)}
-                />:
-              <Card.Img 
-                variant="top" 
-                src={this.props.userPicture}/>}
+                src={this.props.userPicture}
+                alt={this.props.username}/>
             <Card.Body>
               <Card.Title>{`Username: ${this.props.username||'unavailable'}`}</Card.Title>
               <Card.Text>{`Email: ${this.props.userEmail||'unavailable'}`}</Card.Text>

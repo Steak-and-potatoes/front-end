@@ -1,8 +1,6 @@
 import React from "react";
 import "./Landing.css";
 import Carousel from "react-bootstrap/Carousel";
-import Modal from 'react-bootstrap/Modal';
-import { AiOutlineCopy } from 'react-icons/ai';
 
 const imagesArray = [
   {
@@ -175,7 +173,6 @@ export default class Landing extends React.Component {
       copyColor:'black'
     };
   }
-
 
   render() {
     let imageElements = imagesArray

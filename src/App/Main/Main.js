@@ -10,6 +10,7 @@ import ErrorModal from './ErrorModal/ErrorModal.js';
 import static_fullRecipe from '../../Data/data-by-id.json';
 import {useNavigate} from 'react-router-dom';
 import AttributionModal from './AttributionModal/AttributionModal.js';
+import {useAuth0} from '@auth0/auth0-react';
 
 let SERVER = process.env.REACT_APP_SERVER;
 
@@ -26,6 +27,7 @@ function Main() {
   });
 
   let navigate = useNavigate();
+  let auth0 = useAuth0();
 
   function handlerFullRecipe(id,object=null) {
     if(id!==state.fullRecipeID && object===null){
@@ -80,14 +82,15 @@ function Main() {
             <Recipe 
               fullRecipe={state.fullRecipe}
               handlerUpdateError={handlerUpdateError}/>}/>
-        <Route exact path="/profile" element={
+        {auth0.isAuthenticated &&
+          <Route exact path="/profile" element={
             <Profile
               displayProfileCard={state.displayProfileCard}
               handlerUpdateProfileCard={handlerUpdateProfileCard}
               handlerAttribution={handlerAttribution}
               handlerFullRecipe={handlerFullRecipe}
               handlerUpdateError={handlerUpdateError}
-              />}/>
+              />}/>}
       </Routes>
     </div>
   )
@@ -95,63 +98,4 @@ function Main() {
 
 export default Main;
 
-// class Main extends React.Component {
-//   constructor(props){
-//     super(props)
-//     this.state={
-//       fullRecipeID:null,
-//       fullRecipe:static_fullRecipe,
-//       displayError:false,
-//       error:null,
-//     }
-//   }
 
-//   handlerFullRecipe = (id,object=null) => {
-//     if(id!==this.state.fullRecipeID && object===null){
-//           let url = `${SERVER}/recipe?id=${id}`;
-//           axios.get(url)
-//             .then(res => {
-//               this.setState({fullRecipeID:id,fullRecipe:res.data,displayError:false,error:null});
-//             })
-//             .then(() => browserHistory.push('/recipe'))
-//             .catch(err => this.handlerUpdateError(true,err.message))
-//       }
-//     if (id!==this.state.fullRecipeID && object) {
-//         this.setState({fullRecipe:object})
-//       }
-//   }
-  
-
-//   handlerUpdateError = (bool,errorMessage=null) => {
-//     this.setState({displayError:bool,error:errorMessage})
-//   }
-
-//   render () {
-  
-//       console.log(this.state.fullRecipe);
-//       return (
-//         <div className="main-container">
-//           <ErrorModal 
-//             displayError={this.state.displayError} 
-//             error={this.state.error}
-//             handlerUpdateError={()=>this.handlerUpdateError(false,null)} />
-//           <Routes>
-//             <Route exact path="/" element={<Landing/>}/>
-//             <Route exact path="/search" element={
-//               <Search 
-//                 handlerFullRecipe={this.handlerFullRecipe}
-//                 handlerUpdateError={this.handlerUpdateError}/>}/>
-//             <Route exact path="/recipe" element={
-//               <Recipe 
-//                 fullRecipe={this.state.fullRecipe}
-//                 handlerUpdateError={this.handlerUpdateError}/>}/>
-//             <Route exact path="/profile" element={
-//               <Profile
-//                 handlerFullRecipe={this.handlerFullRecipe}
-//                 handlerUpdateError={this.handlerUpdateError}
-//                 />}/>
-//           </Routes>
-//         </div>
-//       );
-//   }
-// }
