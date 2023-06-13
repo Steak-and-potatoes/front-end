@@ -15,11 +15,11 @@ export default class Search extends React.Component {
     super(props);
     this.state = {
       queryNumber: 2,
-      searchByIngredients: [{ query: `${nanoid()}`, text: "Beef" },{ query: `${nanoid()}`, text: "" }],
+      searchByIngredients: [{ query: `${nanoid()}`, text: "Beef" }, { query: `${nanoid()}`, text: "" }],
 
-      byIngredientsArray:static_byIngredientsArray,
+      byIngredientsArray: static_byIngredientsArray,
 
-      accordionKey:null
+      accordionKey: null
     };
   }
 
@@ -68,29 +68,31 @@ export default class Search extends React.Component {
     event.preventDefault();
     try {
       let regex = /[0-9\W]/g;
-      let arrayQueries = this.state.searchByIngredients.filter(object => (object.text!=="" && !regex.test(object.text))).reduce((acc,b)=>{acc.push(b.text.toLowerCase());return acc;},[]);
-      if (arrayQueries.length===0){
-        this.props.handlerUpdateError(true,"Must submit one or more ingredients without any digits(123) or special characters(%$&*).")
+      let arrayQueries = this.state.searchByIngredients.filter(object => (object.text !== "" && !regex.test(object.text))).reduce((acc, b) => { acc.push(b.text.toLowerCase()); return acc; }, []);
+      if (arrayQueries.length === 0) {
+        this.props.handlerUpdateError(true, "Must submit one or more ingredients without any digits(123) or special characters(%$&*).")
       } else {
-        let queryString = arrayQueries.map((query,idx) => `ing${idx+1}=${query}`).join("&")
+        let queryString = arrayQueries.map((query, idx) => `ing${idx + 1}=${query}`).join("&")
         let url = `${SERVER}/options?${queryString}`
-        
+
         axios.get(url)
           .then(res => {
-            if(res.data.meals===null){
-              this.setState({byIngredientsArray:[]})
+            if (res.data.meals === null) {
+              this.setState({ byIngredientsArray: [] })
             } else {
-              this.props.handlerUpdateError(false,null)
-              this.setState({byIngredientsArray:res.data.meals})}})
-          .catch(error => this.props.handlerUpdateError(true,error.message))
+              this.props.handlerUpdateError(false, null)
+              this.setState({ byIngredientsArray: res.data.meals })
+            }
+          })
+          .catch(error => this.props.handlerUpdateError(true, error.message))
       }
     } catch (error) {
-      this.props.handlerUpdateError(true,error.message)
+      this.props.handlerUpdateError(true, error.message)
     }
   }
-  
+
   handlerUpdateAccordionKey = (idx) => {
-    this.setState({accordionKey:idx});
+    this.setState({ accordionKey: idx });
   }
 
 
@@ -100,14 +102,14 @@ export default class Search extends React.Component {
     let formGroups = this.state.searchByIngredients.map((object, idx) => {
       return (
         <Form.Group key={idx} className="mb-3" controlId={object.query}>
-            <Form.Control
-              type="text"
-              name={object.query}
-              onChange={this.handlerUpdateForm}
-              value={object.text}
-              placeholder="ingredient..."
-            />
-            <FaMinus onClick={() => this.handlerRemoveField(object.query)} />
+          <Form.Control
+            type="text"
+            name={object.query}
+            onChange={this.handlerUpdateForm}
+            value={object.text}
+            placeholder="ingredient..."
+          />
+          <FaMinus onClick={() => this.handlerRemoveField(object.query)} />
         </Form.Group>
       );
     });
@@ -116,29 +118,33 @@ export default class Search extends React.Component {
       <div className="search-container">
 
         <h4>Enter one ingredient per search field and click submit.</h4>
-        <Form 
-            onSubmit={this.handlerOnSubmit}>
-            {formGroups}
-            <Button 
-              variant="primary" 
+        <Form
+          onSubmit={this.handlerOnSubmit}>
+          {formGroups}
+          <div className="search-buttons">
+            <Button className="addButton" onClick={this.handlerAddSearchField}>
+              Add Ingredient
+            </Button>
+            <Button
+              className="searchButton"
               type="submit">
               Search
             </Button>
-            <Button variant="primary" onClick={this.handlerAddSearchField}>
-              Add Ingredient
-            </Button>
-          </Form>
-
-          {this.state.byIngredientsArray.length!==0?
-                <RecipesAccordion
-                  type='search'
-                  defaultActiveKey={this.state.accordionKey}
-                  recipesArray={this.state.byIngredientsArray}
-                  handlerFullRecipe={this.props.handlerFullRecipe}
-                  handlerUpdateAccordionKey={this.handlerUpdateAccordionKey}
-                />:
+          </div>
+        </Form>
+        <hr />
+        <div className="recipes">
+          {this.state.byIngredientsArray.length !== 0 ?
+            <RecipesAccordion
+              type='search'
+              defaultActiveKey={this.state.accordionKey}
+              recipesArray={this.state.byIngredientsArray}
+              handlerFullRecipe={this.props.handlerFullRecipe}
+              handlerUpdateAccordionKey={this.handlerUpdateAccordionKey}
+            /> :
             null
           }
+        </div>
       </div>
     );
   }
