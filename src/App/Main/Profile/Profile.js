@@ -15,25 +15,24 @@ class Profile extends React.Component {
   }
   componentDidMount() {
     // this.props.auth0.getIdTokenClaims()
-    //   .then(res => console.log(res));
+    //   .then(res => console.log(res.__raw));
 
     if(this.props.auth0.isAuthenticated){
       this.props.auth0.getIdTokenClaims()
         .then(res => {
-          const jwt = res.__raw;
-          const username = res.name;
+          // const jwt = res.__raw;
           const email = res.email;
           const config = {
-            headers: { "Authorization": `Bearer ${jwt}` },
+            headers: {"email":`${email}`},
             method: 'get',
-            body:{name:username,email:email},
+            // body:{"email":`${email}`},
             baseURL: process.env.REACT_APP_SERVER,
             url: '/recipesAll'
           }
-          console.log(config)
+         
           axios(config)
             .then(res => {
-              const resRecipes = res.data.data;
+              const resRecipes = res.data;
               this.setState({ databaseAllRecipes: resRecipes})
             })
             .catch(err => {
