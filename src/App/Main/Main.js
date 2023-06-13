@@ -43,7 +43,7 @@ class Main extends React.Component {
   }
 
   render () {
-      console.log(this.state.fullRecipe);
+      // console.log(this.state.fullRecipe);
       return (
         <div className="main-container">
           <ErrorModal 
@@ -63,6 +63,7 @@ class Main extends React.Component {
             <Route exact path="/profile" element={
               <Profile
                 handlerFullRecipe={this.handlerFullRecipe}
+                handlerUpdateError={this.handlerUpdateError}
                 />}/>
           </Routes>
         </div>
