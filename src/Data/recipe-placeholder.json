@@ -1,0 +1,20 @@
+{
+    "idMeal": "12321",
+    "strMeal": "Easy Dog Donut Recipe",
+    "strCategory": "Dog",
+    "strArea": "North America",
+    "strInstructions": "Preheat oven to 350° F. Grease two 6-cup donut tins and set aside.\r\nIn a mixing bowl, combine mashed bananas, peanut butter, coconut oil and honey. Mix until well combined. Add egg and mix until incorporated. Stir in flour and baking soda just until combined.\r\nTransfer batter to prepared donut tins. Bake at 350° F for 15 to 20 minutes or until a toothpick inserted in one of the donuts comes out clean. Let donuts cool for a few minutes in the pan before transferring them to a wire rack to cool completely.\r\nIn a mixing bowl, combine greek yogurt and peanut butter until smooth and creamy. Use a knife or offset spatula to spread the frosting on the cooled donuts. Sprinkle with crushed biscuits if desired and serve to your pup!",
+    "strMealThumb": "dogDonuteImage",
+    "strYoutube": "https://www.ifyougiveablondeakitchen.com/dog-donuts/",
+    "arrayIngredients": [
+      "1 cup mashed bananas, (about 2 ripe large bananas)",
+      "1/4 cup (65 g) natural creamy peanut butter",
+      "1/4 cup (52 g) coconut oil, melted",
+      "2 Tablespoons honey",
+      "1 large egg, room temperature",
+      "1 cup (125 g) whole wheat flour",
+      "1/2 teaspoon baking soda",
+      "1/2 cup (142 g) greek yogurt",
+      "1/4 cup (65 g) natural creamy peanut butter"
+    ]
+  }

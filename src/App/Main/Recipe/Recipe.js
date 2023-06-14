@@ -1,57 +1,97 @@
-import React from 'react';
-import Carousel from 'react-bootstrap/Carousel';
-import './Recipe.css';
+import React from "react";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import "./Recipe.css";
+import { withAuth0 } from "@auth0/auth0-react";
+import placeholderFullRecipe from "../../../Data/recipe-placeholder.json";
 
-export default class Recipe extends React.Component {
-  constructor(props){
+let dogImageAttribution= {
+  creator: "Camylla Battani",
+  image: "camylla-battani-JgdgKvYgiwI-unsplash.jpg",
+  link: "https://unsplash.com/@camylla93",
+};
+
+class Recipe extends React.Component {
+  constructor(props) {
     super(props);
-    this.state={}
+    this.state = {
+      fullRecipe: this.props.fullRecipe || placeholderFullRecipe,
+    };
   }
-  render () {
-      console.log(this.props.fullRecipe);
-      return (
-        <div className="recipe-container">
-      <Carousel>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="https://www.themealdb.com/images/media/meals/qrqywr1503066605.jpg"
-          alt="First slide"
-        />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="https://www.themealdb.com/images/media/meals/kvbotn1581012881.jpg"
-          alt="Second slide"
-        />
 
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
+
+  render() {
+    // console.log(this.state.fullRecipe._id);
+    // console.log(this.props.auth0.isAuthenticated);
+    return (
+      <div
+          className="recipe-container"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}>
+        <Card style={{ width: "80%" }}>
+
+          {this.state.fullRecipe.strMealThumb==="dogDonuteImage"?
+            <Card.Img 
+              variant="top" 
+              onClick={()=>this.props.handlerAttribution(dogImageAttribution,true)}
+              src={require("../../Images/camylla-battani-JgdgKvYgiwI-unsplash.jpg")} />:
+            <Card.Img 
+              variant="top" 
+              src={this.state.fullRecipe.strMealThumb} />}
+
+          <Card.Body>
+            <Card.Title><h2>{this.state.fullRecipe.strMeal}</h2></Card.Title>
+            <div>
+      
           
-          className="d-block w-100"
-          src="https://www.themealdb.com/images/media/meals/vwrpps1503068729.jpg"
-          alt="Third slide"
-        />
+              <div className="recipe-head">
+                {this.state.fullRecipe.strArea &&
+                  <p><strong>Origins: </strong>{this.state.fullRecipe.strArea}</p>}
+                {this.state.fullRecipe.strYoutube && 
+                  <Button 
+                    variant="primary" 
+                    style={{ marginLeft: "15px" }}>
+                      Tutorial
+                    </Button>}
+              </div>
 
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
-        </div>
-      );
+              {this.state.fullRecipe.arrayIngredients &&
+                <div className="recipe-list">
+                  <h4>Ingredients:</h4>
+                    <ul>
+                      {this.state.fullRecipe.arrayIngredients.map((ingredient,idx) => {
+                          return <li key={idx}>{ingredient}</li>;})
+                        }
+                    </ul>
+                </div>}
+                
+              {this.state.fullRecipe.strInstructions &&
+                <div className="recipe-instructions">
+                  <h4>Instructions:</h4>
+                   {this.state.fullRecipe.strInstructions.split('\r\n').map((sentence,idx) => <p key={idx}>{sentence}</p>)}
+                </div>}
+
+            </div>
+
+            {this.props.auth0.isAuthenticated&&!this.state.fullRecipe._id&&<>
+              <Button variant="primary" style={{ marginLeft: "15px" }}>
+                Save Recipe
+              </Button>
+              </>}
+
+            {this.props.auth0.isAuthenticated&&this.state.fullRecipe._id&&<>
+                <Button variant="secondary">Edit Recipe</Button>
+                <Button variant="warning">Delete Recipe</Button>
+              </>}
+          </Card.Body>
+        </Card>
+      </div>
+    );
   }
 }
+
+export default withAuth0(Recipe);
+
