@@ -3,10 +3,11 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { FaMinus } from "react-icons/fa";
 import { nanoid } from "nanoid";
-import axios from 'axios';
+import axios from "axios";
 import "./Search.css";
-import static_byIngredientsArray from '../../../Data/data-multiple-ingredients.json';
-import RecipesAccordion from '../RecipesAccordion/RecipesAccordion.js';
+import static_byIngredientsArray from "../../../Data/data-multiple-ingredients.json";
+import RecipesAccordion from "../RecipesAccordion/RecipesAccordion.js";
+import LoadingSymbol from '../LoadingSymbol/LoadingSymbol.js'
 
 let SERVER = process.env.REACT_APP_SERVER;
 
@@ -15,11 +16,15 @@ export default class Search extends React.Component {
     super(props);
     this.state = {
       queryNumber: 2,
-      searchByIngredients: [{ query: `${nanoid()}`, text: "Beef" }, { query: `${nanoid()}`, text: "" }],
+      searchByIngredients: [
+        { query: `${nanoid()}`, text: "Chicken" },
+        { query: `${nanoid()}`, text: "" }
+      ],
 
       byIngredientsArray: static_byIngredientsArray,
 
-      accordionKey: null
+      accordionKey: null,
+      displayLoadingSymbol:false
     };
   }
 
@@ -66,35 +71,52 @@ export default class Search extends React.Component {
 
   handlerOnSubmit = (event) => {
     event.preventDefault();
+    this.setState({displayLoadingSymbol:true});
     try {
-      let regex = /[0-9\W]/g;
-      let arrayQueries = this.state.searchByIngredients.filter(object => (object.text !== "" && !regex.test(object.text))).reduce((acc, b) => { acc.push(b.text.toLowerCase()); return acc; }, []);
+      // let regex = /[0-9!@#$%^&*(),.?":{}|<>]/g;
+      let regex = /^[a-zA-Z ]*$/;
+      let arrayQueries = this.state.searchByIngredients
+        .filter((object) => object.text !== "" && regex.test(object.text))
+        .reduce((acc, b) => {
+          acc.push(b.text.toLowerCase());
+          return acc;
+        }, []);
       if (arrayQueries.length === 0) {
-        this.props.handlerUpdateError(true, "Must submit one or more ingredients without any digits(123) or special characters(%$&*).")
+        this.setState({displayLoadingSymbol:false});
+        this.props.handlerUpdateError(
+          true,
+          "Must submit one or more ingredients without any digits(123) or special characters(%$&*)."
+        );
       } else {
-        let queryString = arrayQueries.map((query, idx) => `ing${idx + 1}=${query}`).join("&")
-        let url = `${SERVER}/options?${queryString}`
+        let queryString = arrayQueries
+          .map((query, idx) => `ing${idx + 1}=${query}`)
+          .join("&");
+        let url = `${SERVER}/options?${queryString}`;
 
-        axios.get(url)
-          .then(res => {
+        axios
+          .get(url)
+          .then((res) => {
             if (res.data.meals === null) {
-              this.setState({ byIngredientsArray: [] })
+              this.setState({ byIngredientsArray: [], displayLoadingSymbol:false });
+              this.props.handlerUpdateError(true, "No search results returned. Please consider ingredient spelling, number of ingredients, and unusual combinations that might not return any results.");
             } else {
-              this.props.handlerUpdateError(false, null)
-              this.setState({ byIngredientsArray: res.data.meals })
+              this.props.handlerUpdateError(false, null);
+              this.setState({ byIngredientsArray: res.data.meals, displayLoadingSymbol:false });
             }
           })
-          .catch(error => this.props.handlerUpdateError(true, error.message))
+          .catch((error) => {
+            this.setState({displayLoadingSymbol:false});
+            this.props.handlerUpdateError(true, error.message);});
       }
     } catch (error) {
-      this.props.handlerUpdateError(true, error.message)
+      this.setState({displayLoadingSymbol:false});
+      this.props.handlerUpdateError(true, error.message);
     }
-  }
+  };
 
   handlerUpdateAccordionKey = (idx) => {
     this.setState({ accordionKey: idx });
-  }
-
+  };
 
   render() {
     // console.log(this.state.byIngredientsArray);
@@ -116,34 +138,32 @@ export default class Search extends React.Component {
 
     return (
       <div className="search-container">
-
         <h4>Enter one ingredient per search field and click submit.</h4>
-        <Form
-          onSubmit={this.handlerOnSubmit}>
+        <Form onSubmit={this.handlerOnSubmit}>
           {formGroups}
           <div className="search-buttons">
             <Button className="addButton" onClick={this.handlerAddSearchField}>
               Add Ingredient
             </Button>
-            <Button
-              className="searchButton"
-              type="submit">
+            <Button className="searchButton" type="submit">
               Search
             </Button>
           </div>
         </Form>
         <hr />
         <div className="recipes">
-          {this.state.byIngredientsArray.length !== 0 ?
+          {this.state.byIngredientsArray.length !== 0 && !this.state.displayLoadingSymbol && (
             <RecipesAccordion
-              type='search'
+              type="search"
               defaultActiveKey={this.state.accordionKey}
               recipesArray={this.state.byIngredientsArray}
               handlerFullRecipe={this.props.handlerFullRecipe}
               handlerUpdateAccordionKey={this.handlerUpdateAccordionKey}
-            /> :
-            null
-          }
+            />
+          )}
+
+          {this.state.displayLoadingSymbol &&
+            <LoadingSymbol/>}
         </div>
       </div>
     );
