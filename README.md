@@ -192,4 +192,6 @@ Go Chef Yourself website empowers all users to be their own chef and create meal
 
 ![database schema](/images/database-img.png)
 
+Attributions:
 
+Cooking icon: created by Freepik - Flaticon
