@@ -15,18 +15,14 @@ import {useAuth0} from '@auth0/auth0-react';
 let SERVER = process.env.REACT_APP_SERVER;
 
 
-function Main() {
+function Main(props) {
   let [state,setState] = React.useState({
     fullRecipeID:null,
     fullRecipe:static_fullRecipe,
     displayError:false,
     error:null,
-    displayProfileCard:true,
     displayAttribution:false,
-    attributionObject:{},
-    username:"",
-    userEmail:"",
-    userPicture:""
+    attributionObject:{}
   });
 
   let navigate = useNavigate();
@@ -51,10 +47,6 @@ function Main() {
 
   function handlerUpdateError(bool,errorMessage=null) {
     setState({displayError:bool,error:errorMessage})
-  }
-
-  function handlerUpdateProfileCard(bool) {
-    setState({displayProfileCard:bool});
   }
 
   function handlerAttribution(object, bool) {
@@ -89,10 +81,8 @@ function Main() {
         {auth0.isAuthenticated &&
           <Route exact path="/profile" element={
             <Profile
-              displayProfileCard={state.displayProfileCard}
-              handlerUpdateProfileCard={handlerUpdateProfileCard}
-              handlerAttribution={handlerAttribution}
               handlerFullRecipe={handlerFullRecipe}
+              handlerAttribution={handlerAttribution}
               handlerUpdateError={handlerUpdateError}
               />}/>}
       </Routes>

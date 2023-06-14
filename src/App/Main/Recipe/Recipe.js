@@ -17,7 +17,7 @@ class Recipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullRecipe: placeholderFullRecipe,
+      fullRecipe: this.props.fullRecipe ||placeholderFullRecipe,
       displayLoading:false
     };
   }
@@ -28,7 +28,7 @@ class Recipe extends React.Component {
 
       let config = {
         baseURL:process.env.REACT_APP_SERVER,
-        url:'/saveRecipe',
+        url:'/createRecipe',
         data:this.state.fullRecipe,
         method:'post'
       }
