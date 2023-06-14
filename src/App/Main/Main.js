@@ -81,6 +81,7 @@ function Main() {
         <Route exact path="/recipe" element={
             <Recipe 
               fullRecipe={state.fullRecipe}
+              handlerAttribution={handlerAttribution}
               handlerUpdateError={handlerUpdateError}/>}/>
         {auth0.isAuthenticated &&
           <Route exact path="/profile" element={

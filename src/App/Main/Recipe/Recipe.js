@@ -5,16 +5,24 @@ import "./Recipe.css";
 import { withAuth0 } from "@auth0/auth0-react";
 import placeholderFullRecipe from "../../../Data/recipe-placeholder.json";
 
+let dogImageAttribution= {
+  creator: "Camylla Battani",
+  image: "camylla-battani-JgdgKvYgiwI-unsplash.jpg",
+  link: "https://unsplash.com/@camylla93",
+};
+
 class Recipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullRecipe: placeholderFullRecipe,
+      fullRecipe: this.props.fullRecipe || placeholderFullRecipe,
     };
   }
+
+
   render() {
-    console.log(this.state.fullRecipe._id);
-    console.log(this.props.auth0.isAuthenticated);
+    // console.log(this.state.fullRecipe._id);
+    // console.log(this.props.auth0.isAuthenticated);
     return (
       <div
           className="recipe-container"
@@ -24,7 +32,16 @@ class Recipe extends React.Component {
             alignItems: "center",
           }}>
         <Card style={{ width: "80%" }}>
-          <Card.Img variant="top" src={this.state.fullRecipe.strMealThumb} />
+
+          {this.state.fullRecipe.strMealThumb==="dogDonuteImage"?
+            <Card.Img 
+              variant="top" 
+              onClick={()=>this.props.handlerAttribution(dogImageAttribution,true)}
+              src={require("../../Images/camylla-battani-JgdgKvYgiwI-unsplash.jpg")} />:
+            <Card.Img 
+              variant="top" 
+              src={this.state.fullRecipe.strMealThumb} />}
+
           <Card.Body>
             <Card.Title><h2>{this.state.fullRecipe.strMeal}</h2></Card.Title>
             <div>
@@ -32,7 +49,7 @@ class Recipe extends React.Component {
           
               <div className="recipe-head">
                 {this.state.fullRecipe.strArea &&
-                  <p><strong>Origins:</strong>{this.state.fullRecipe.strArea}</p>}
+                  <p><strong>Origins: </strong>{this.state.fullRecipe.strArea}</p>}
                 {this.state.fullRecipe.strYoutube && 
                   <Button 
                     variant="primary" 
