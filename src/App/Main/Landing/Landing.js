@@ -209,6 +209,7 @@ export default class Landing extends React.Component {
         >
           {imageElements}
         </Carousel>
+        <div className="app-statement">
         <h3>Our Motivation:</h3>
         <p>"The most indespensible ingredient of all good home cooking: love for those you are cooking for." - Sophia Loren</p>
         <p>
@@ -225,7 +226,7 @@ export default class Landing extends React.Component {
           count on us to keep good care of your new cookbook for the next time
           you are hungry. :)
         </p>
-
+        </div>
         <Modal 
           show={this.state.showImageAttribution} 
           onHide={()=>this.handlerImageAttribution({},false,'black')}>
