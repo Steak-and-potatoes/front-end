@@ -23,7 +23,10 @@ function Main() {
     error:null,
     displayProfileCard:true,
     displayAttribution:false,
-    attributionObject:{}
+    attributionObject:{},
+    username:"",
+    userEmail:"",
+    userPicture:""
   });
 
   let navigate = useNavigate();
