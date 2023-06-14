@@ -1,6 +1,3 @@
-
-/* whole website */
-
 :root {
     --tuscan: #e6d3a3;
     --straw: #d8d174;
@@ -9,17 +6,19 @@
     --swamp-city: #91972a;
 }
 
-body{
-  background-color: var(--tuscan);
+body {
+    background-color: var(--tuscan);
 }
-  
+
 .app-container {
-  margin: 5%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+    background-color: var(--tuscan);
+    margin: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .header-container {
-  background-color: var(--straw);
+    background-color: var(--straw);
 }
+

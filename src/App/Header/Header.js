@@ -12,8 +12,19 @@ class Header extends React.Component {
   render() {
     // console.log(this.props.auth0.isAuthenticated);
     return (
+
         <Navbar bg="light" expand="lg">
             <Navbar.Brand><img src={icon} alt="cooking icon" />Go Chef Yourself!</Navbar.Brand>
+
+      
+        <Navbar bg="light" expand="lg">
+        {/* <Container className="container"> */}
+            <Navbar.Brand><MdFoodBank/>Go Chef Yourself!</Navbar.Brand>
+
+            {this.props.auth0.isAuthenticated?
+              <LogOutButton/>:
+              <LoginButton/>}
+
              
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -44,11 +55,13 @@ class Header extends React.Component {
               </Nav>
             </Navbar.Collapse>
 
+
             {this.props.auth0.isAuthenticated?
               <LogOutButton/>:
               <LoginButton/>}
               
         </Navbar>
+
     );
   }
 }
