@@ -12,7 +12,7 @@ class Header extends React.Component {
   render() {
     return (
 
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="light" expand="md">
             <Navbar.Brand><img src={icon} alt="cooking icon" />Go Chef Yourself!</Navbar.Brand>
              
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -43,7 +43,6 @@ class Header extends React.Component {
                   }
               </Nav>
             </Navbar.Collapse>
-
 
             {this.props.auth0.isAuthenticated?
               <LogOutButton/>:
