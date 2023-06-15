@@ -13,9 +13,6 @@ class RecipeEdit extends React.Component {
     };
   }
  
-
-
-
   handlerDisplaySaveEditButton = () => {
     if(this.props.auth0.isAuthenticated && this.state.fullRecipe._id && !this.state.displayLoading) {
       return <Button 
@@ -29,7 +26,7 @@ class RecipeEdit extends React.Component {
   }
 
   render() {
-    console.log(this.state.fullRecipe);
+    // console.log(this.state.fullRecipe);
     // console.log(this.props.auth0.isAuthenticated);
     return (
       <div
@@ -41,18 +38,7 @@ class RecipeEdit extends React.Component {
         }}
       >
         <Card style={{ width: "80%" }}>
-          {this.state.fullRecipe.strMealThumb === "dogDonuteImage" ? (
-            <Card.Img
-              variant="top"
-              onClick={() =>
-                this.props.handlerAttribution(dogImageAttribution, true)
-              }
-              src={require("../../Images/camylla-battani-JgdgKvYgiwI-unsplash.jpg")}
-            />
-          ) : (
-            <Card.Img variant="top" src={this.state.fullRecipe.strMealThumb} />
-          )}
-
+          <Card.Img variant="top" src={this.state.fullRecipe.strMealThumb}/>
           <Card.Body>
             <Card.Title>
               <h2>{this.state.fullRecipe.strMeal}</h2>
