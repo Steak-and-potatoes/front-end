@@ -44,7 +44,6 @@ class Header extends React.Component {
               </Nav>
             </Navbar.Collapse>
 
-
             {this.props.auth0.isAuthenticated?
               <LogOutButton/>:
               <LoginButton/>}
