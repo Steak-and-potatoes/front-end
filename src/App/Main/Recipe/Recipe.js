@@ -17,7 +17,7 @@ class Recipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullRecipe: this.props.fullRecipe ||placeholderFullRecipe,
+      fullRecipe: this.props.fullRecipe||placeholderFullRecipe,
       username:"",
       userEmail:"",
       userPicture:"",
