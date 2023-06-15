@@ -110,6 +110,7 @@ class Recipe extends React.Component {
       this.state.displayLoading
     ) {
       return <LoadingSymbol />;
+
     }
   };
 
