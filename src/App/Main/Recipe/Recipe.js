@@ -21,7 +21,7 @@ class Recipe extends React.Component {
       username:"",
       userEmail:"",
       userPicture:"",
-      displayLoading:false
+      displayLoading:false,
     };
   }
  
