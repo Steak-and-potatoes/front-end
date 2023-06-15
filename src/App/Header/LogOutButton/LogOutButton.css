@@ -1,6 +1,7 @@
 .logoutButton{
     background-color: var(--middle-green-yellow);
     border: solid 1px var(--middle-green-yellow);
+    margin-right: 1rem;
 }
 
 .logoutButton:hover{

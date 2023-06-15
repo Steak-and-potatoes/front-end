@@ -1,0 +1,23 @@
+.recipe-pic {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    width: 180px;
+    height: 200px;
+}
+
+.recipe-button {
+    margin-top: 8px;
+    margin-left: 30%;
+    background-color: var(--middle-green-yellow);
+    border: solid 1px var(--middle-green-yellow);
+   
+    background-color: var(--middle-green-yellow);
+    border: solid 1px var(--middle-green-yellow);
+    
+   
+    font-size: 0.8rem;
+    background-color: var(--middle-green-yellow) !important;
+    border: solid 1px var(--middle-green-yellow) !important;
+}

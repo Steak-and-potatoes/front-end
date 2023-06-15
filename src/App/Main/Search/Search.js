@@ -131,14 +131,14 @@ export default class Search extends React.Component {
             value={object.text}
             placeholder="ingredient..."
           />
-          <FaMinus onClick={() => this.handlerRemoveField(object.query)} />
+          <FaMinus className="minus-ing" onClick={() => this.handlerRemoveField(object.query)} />
         </Form.Group>
       );
     });
 
     return (
       <div className="search-container">
-        <h4>Enter one ingredient per search field and click submit.</h4>
+        <h4>Enter one ingredient per search field then click search.</h4>
         <Form onSubmit={this.handlerOnSubmit}>
           {formGroups}
           <div className="search-buttons">

@@ -6,13 +6,15 @@
     --swamp-city: #91972a;
 }
 
-<<<<<<< HEAD
 body {
+   
     background-color: var(--tuscan);
+    font-family:'Josefin Sans', sans-serif; ;
 }
 
 .app-container {
     background-color: var(--tuscan);
+    border-radius: 10px;
     margin: 5%;
     display: flex;
     flex-direction: column;
@@ -22,30 +24,6 @@ body {
 .header-container {
     background-color: var(--straw);
 }
-/* label each section */
-=======
-/* whole website */
->>>>>>> b57b433f9533026fb274cc780967977e3a73f722
 
-:root {
-    --tuscan: #e6d3a3;
-    --straw: #d8d174;
-    --anti-flash-white: #f2f4f3;
-    --middle-green-yellow: #b6c454;
-    --swamp-city: #91972a;
-}
 
-body{
-  background-color: var(--tuscan);
-}
-  
-.app-container {
-  margin: 5%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
 
-.header-container {
-  background-color: var(--straw);
-}

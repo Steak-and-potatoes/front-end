@@ -7,16 +7,16 @@ import Nav from "react-bootstrap/Nav";
 import LoginButton from './LoginButton/LoginButton.js';
 import LogOutButton from './LogOutButton/LogOutButton.js';
 import {withAuth0} from '@auth0/auth0-react';
-import icon from '../Images/icon/cooking.png'
+
  
 class Header extends React.Component {
   render() {
-    // console.log(this.props.auth0.isAuthenticated);
     return (
-      // <div className="header-container">
+
+
         <Navbar bg="light" expand="lg">
-        {/* <Container className="container"> */}
-            <Navbar.Brand><img src={icon} alt="cooking icon" />Go Chef Yourself!</Navbar.Brand>
+
+        <Navbar.Brand><img src={require('../Images/cooking.png')} alt="cooking icon" />Go Chef Yourself!</Navbar.Brand>
              
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -47,12 +47,13 @@ class Header extends React.Component {
               </Nav>
             </Navbar.Collapse>
 
+
             {this.props.auth0.isAuthenticated?
-            <logOutButton/>:
-            <LoginButton/>}
-          {/* </Container> */}
+              <LogOutButton/>:
+              <LoginButton/>}
+              
         </Navbar>
-      // </div>
+
     );
   }
 }

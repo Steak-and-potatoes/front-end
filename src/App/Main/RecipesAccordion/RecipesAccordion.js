@@ -20,11 +20,11 @@ export default class RecipeAccorion extends React.Component {
                     onClick={()=>this.props.handlerUpdateAccordionKey(idx)}
                     >{recipe.strMeal}</Accordion.Header>
                     <Accordion.Body>
-                      <img
+                      <img className="recipe-pic"
                         src={recipe.strMealThumb}
                         alt={recipe.strMeal}
                         />
-                      <Button
+                      <Button className="recipe-button"
                         onClick={()=>this.props.handlerFullRecipe(recipe.idMeal)}
                         >View Full Recipe</Button>
                       </Accordion.Body>
@@ -38,7 +38,7 @@ export default class RecipeAccorion extends React.Component {
                     <Accordion.Body>
                       <p>{`Origins: ${recipe.strArea||'unavailable'}`}</p>
                       <p>{`Tags: ${recipe.strTags||'unavailable'}`}</p>
-                      <img
+                    <img className="recipe-pic"
                         src={recipe.strMealThumb}
                         alt={recipe.strMeal}
                         />
