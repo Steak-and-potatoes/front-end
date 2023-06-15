@@ -6,7 +6,6 @@ import Nav from "react-bootstrap/Nav";
 import LoginButton from './LoginButton/LoginButton.js';
 import LogOutButton from './LogOutButton/LogOutButton.js';
 import {withAuth0} from '@auth0/auth0-react';
-
  
 class Header extends React.Component {
   render() {

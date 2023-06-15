@@ -5,6 +5,7 @@ div.recipe-container {
     padding-right: 30px;
     padding-bottom: 50px;
     padding-left: 80px;
+    
   }
 
 img{
@@ -12,3 +13,51 @@ img{
     height: 425px;
 }
 
+.searchButton{
+  padding: 0.75rem 1.25rem;
+  background-color: var(--swamp-city);
+  border: 1px solid var(--swamp-city);
+}
+
+.searchButton:hover{
+  padding: 0.5rem 1.45rem;
+  background-color: var(--swamp-city);
+  border: 1px solid var(--swamp-city);
+  margin: 0.2rem 0 0.3rem;
+}
+
+.searchButton:active{
+  padding: 0.5rem 1.45rem;
+  background-color: var(--swamp-city)!important;
+  border: 1px solid var(--swamp-city)!important;
+  margin: 0.4rem 0.3rem 0.4rem 0;
+  font-size: 0.8rem;
+}
+
+.addButton{
+  padding: 0.5rem 0.75rem;
+  background-color: var(--middle-green-yellow);
+  border: 1px solid var(--middle-green-yellow);
+}
+
+.addButton:hover{
+  background-color: var(--middle-green-yellow);
+  border: 1px solid var(--middle-green-yellow);
+  padding: 0.2rem 1rem;
+  margin-bottom: 0.15rem;
+}
+
+.addButton:active{
+  background-color: var(--middle-green-yellow)!important;
+  border: 1px solid var(--middle-green-yellow)!important;
+  padding: 0.2rem 1rem;
+  margin-bottom: 0.25rem;
+  margin-left: 0.6rem;
+  font-size: 0.8rem;
+}
+
+.Cardpad {
+  border: 3px solid var(--swamp-city);
+  width: 80%;
+  padding: 20px;
+}
