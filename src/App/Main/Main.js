@@ -7,7 +7,7 @@ import Profile from './Profile/Profile.js';
 import {Routes, Route} from 'react-router-dom';
 import axios from 'axios';
 import ErrorModal from './ErrorModal/ErrorModal.js';
-import static_fullRecipe from '../../Data/data-by-id.json';
+// import static_fullRecipe from '../../Data/data-by-id.json';
 import {useNavigate} from 'react-router-dom';
 import AttributionModal from './AttributionModal/AttributionModal.js';
 import {useAuth0} from '@auth0/auth0-react';

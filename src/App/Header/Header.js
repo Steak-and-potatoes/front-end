@@ -6,14 +6,14 @@ import Nav from "react-bootstrap/Nav";
 import LoginButton from './LoginButton/LoginButton.js';
 import LogOutButton from './LogOutButton/LogOutButton.js';
 import {withAuth0} from '@auth0/auth0-react';
-import icon from '../Images/icon/cooking.png'
+
  
 class Header extends React.Component {
   render() {
     return (
 
-        <Navbar bg="light" expand="md">
-            <Navbar.Brand><img src={icon} alt="cooking icon" />Go Chef Yourself!</Navbar.Brand>
+        <Navbar bg="light" expand="lg">
+            <Navbar.Brand><img src={require("../Images/cooking.png")} alt="cooking icon" />Go Chef Yourself!</Navbar.Brand>
              
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
