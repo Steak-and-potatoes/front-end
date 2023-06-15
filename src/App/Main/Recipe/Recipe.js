@@ -98,18 +98,20 @@ class Recipe extends React.Component {
       !this.state.displayLoading
     ) {
       return (
-        <Button 
-          className="recipe-buttons save-button"
-          onClick={this.handlerSaveRecipe} variant="primary">
-          Save Recipe
-        </Button>
+            <Button 
+              className="recipe-buttons save-button"
+              onClick={this.handlerSaveRecipe} variant="primary">
+              Save Recipe
+            </Button>
       );
     } else if (
       this.props.auth0.isAuthenticated &&
       !this.state.fullRecipe._id &&
       this.state.displayLoading
     ) {
-      return <LoadingSymbol />;
+      return (
+            <LoadingSymbol />
+      )
 
     }
   };
@@ -121,11 +123,11 @@ class Recipe extends React.Component {
       !this.state.displayLoading
     ) {
       return (
-        <Button 
-          className="recipe-buttons edit-button"
-          onClick={this.handlerEditRecipe} variant="secondary">
-          Edit Recipe
-        </Button>
+          <Button 
+            className="recipe-buttons edit-button"
+            onClick={this.handlerEditRecipe} variant="secondary">
+            Edit Recipe
+          </Button>
       );
     } else if (
       this.props.auth0.isAuthenticated &&
@@ -143,11 +145,12 @@ class Recipe extends React.Component {
       !this.state.displayLoading
     ) {
       return (
-        <Button 
-          className="recipe-buttons delete-button"
-          onClick={this.handlerDeleteRecipe} variant="warning">
-          Delete Recipe
-        </Button>
+            <Button 
+              className="recipe-buttons delete-button"
+              onClick={this.handlerDeleteRecipe} variant="warning">
+              Delete Recipe
+            </Button>
+        
       );
     } else if (
       this.props.auth0.isAuthenticated &&
@@ -162,14 +165,6 @@ class Recipe extends React.Component {
     // console.log(this.state.fullRecipe);
     // console.log(this.props.auth0.isAuthenticated);
     return (
-      <div
-        className="recipe-container"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
         <Card 
           className="recipe-card">
           {this.state.fullRecipe.strMealThumb === "dogDonuteImage" ? (
@@ -194,7 +189,6 @@ class Recipe extends React.Component {
               className="recipe-div">
               <h2>{this.state.fullRecipe.strMeal}</h2>
             </Card.Title>
-            <hr />
             <div>
               <div 
                 className="recipe-div">
@@ -203,21 +197,6 @@ class Recipe extends React.Component {
                     <strong>Origins: </strong>
                     {this.state.fullRecipe.strArea}
                   </p>
-                )}
-                {this.state.fullRecipe.strYoutube && (
-                  <a
-                    className=""
-                    href={`${this.state.fullRecipe.strYoutube}`}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    <Button 
-                      className="recipe-buttons tutorial-button"
-                      variant="primary" 
-                      style={{ marginLeft: "15px" }}>
-                      Tutorial
-                    </Button>
-                  </a>
                 )}
                 <hr />
               </div>
@@ -246,19 +225,34 @@ class Recipe extends React.Component {
                     .map((sentence, idx) => (
                       <p key={idx}>{sentence}</p>
                     ))}
-                    <hr />
+                    <hr/>
                 </div>
               )}
             </div>
+            <div className="recipe-buttons-container">
+              {this.state.fullRecipe.strYoutube && (
+                  <a
+                    className=""
+                    href={`${this.state.fullRecipe.strYoutube}`}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <Button 
+                      className="recipe-buttons save-button"
+                      variant="primary">
+                      Tutorial
+                    </Button>
+                  </a>
+                )}
 
-            {this.handlerDisplaySaveButton()}
+              {this.handlerDisplaySaveButton()}
 
-            {this.handlerDisplayEditButton()}
+              {this.handlerDisplayEditButton()}
 
-            {this.handlerDisplayDeleteButton()}
+              {this.handlerDisplayDeleteButton()}
+            </div>
           </Card.Body>
         </Card>
-      </div>
     );
   }
 }
