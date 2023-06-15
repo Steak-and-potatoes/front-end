@@ -78,7 +78,7 @@ class Recipe extends React.Component {
     if(this.props.auth0.isAuthenticated && !this.state.fullRecipe._id && !this.state.displayLoading) {
       return <Button 
         onClick={this.handlerSaveRecipe}
-        variant="primary">
+        className="addButton">
         Save Recipe
       </Button>
     } else if (this.props.auth0.isAuthenticated && !this.state.fullRecipe._id && this.state.displayLoading){
@@ -122,7 +122,7 @@ class Recipe extends React.Component {
           alignItems: "center",
         }}
       >
-        <Card style={{ width: "80%" }}>
+        <Card className="Cardpad">
           {this.state.fullRecipe.strMealThumb === "dogDonuteImage" ? (
             <Card.Img
               variant="top"
@@ -135,7 +135,7 @@ class Recipe extends React.Component {
             <Card.Img variant="top" src={this.state.fullRecipe.strMealThumb} />
           )}
 
-          <Card.Body>
+          <Card.Body >
             <Card.Title>
               <h2>{this.state.fullRecipe.strMeal}</h2>
             </Card.Title>
@@ -153,7 +153,7 @@ class Recipe extends React.Component {
                     rel="noreferrer"
                     target="_blank"
                   >
-                    <Button variant="primary" style={{ marginLeft: "15px" }}>
+                    <Button className="searchButton">
                       Tutorial
                     </Button>
                   </a>
