@@ -50,8 +50,8 @@ class Profile extends React.Component {
     this.setState({accordionKey:idx});
   };
 
-  handlerDisplayProfileCard = () => {
-    this.setState(prevState => ({displayProfileCard:!prevState.displayProfileCard}));
+  handlerDisplayProfileCard = (bool) => {
+    this.setState({displayProfileCard:bool});
   };
 
   render () {
@@ -59,7 +59,7 @@ class Profile extends React.Component {
         <div className="profile-container">
             <ProfileCard 
               displayProfileCard={this.state.displayProfileCard}
-              handlerUpdateProfileCard={this.state.handlerUpdateProfileCard}
+              handlerUpdateProfileCard={this.handlerDisplayProfileCard}
               username={this.state.username}
               userEmail={this.state.userEmail}
               userPicture={this.state.userPicture}

@@ -25,7 +25,8 @@ export default class RecipeAccorion extends React.Component {
                         alt={recipe.strMeal}
                         />
                       <Button
-                        onClick={()=>this.props.handlerFullRecipe(recipe.idMeal)}
+                        className="save-button"
+                        onClick={()=>this.props.handlerFullRecipe(recipe.idMeal,null)}
                         >View Full Recipe</Button>
                       </Accordion.Body>
                   </Accordion.Item>:
@@ -36,13 +37,14 @@ export default class RecipeAccorion extends React.Component {
                     onClick={()=>this.props.handlerUpdateAccordionKey(idx)}
                     >{`${recipe.strMeal||'unavailable'}`}</Accordion.Header>
                     <Accordion.Body>
-                      <p>{`Origins: ${recipe.strArea||'unavailable'}`}</p>
-                      <p>{`Tags: ${recipe.strTags||'unavailable'}`}</p>
+                      {recipe.strArea&&<p>{`Origins: ${recipe.strArea}`}</p>}
+                      {recipe.strTags&&<p>{`Tags: ${recipe.strTags}`}</p>}
                       <img
                         src={recipe.strMealThumb}
                         alt={recipe.strMeal}
                         />
                       <Button
+                        className="save-button"
                         onClick={()=>this.props.handlerFullRecipe(recipe.idMeal,recipe)}
                         >View Full Recipe</Button>
                       </Accordion.Body>
