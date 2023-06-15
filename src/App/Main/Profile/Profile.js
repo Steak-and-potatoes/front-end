@@ -19,7 +19,7 @@ class Profile extends React.Component {
     }
   }
   componentDidMount() {
-    
+    if(this.props.auth0.isAuthenticated){
       this.props.auth0.getIdTokenClaims()
         .then(res => {
           this.setState({username:res.name||"",userEmail:res.email||"",userPicture:res.picture||""})
@@ -41,6 +41,7 @@ class Profile extends React.Component {
               this.setState({databaseAllRecipes:[]})});
         })
         .catch(err => this.props.handlerUpdateError(true,err.message));
+      }
       }
   
 

@@ -17,7 +17,7 @@ class Recipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullRecipe: this.props.fullRecipe||placeholderFullRecipe,
+      fullRecipe: this.props.fullRecipe,
       username:"",
       userEmail:"",
       userPicture:"",
@@ -26,11 +26,13 @@ class Recipe extends React.Component {
   }
  
   componentDidMount() {
+    if(this.props.auth0.isAuthenticated){
       this.props.auth0.getIdTokenClaims()
         .then(res => {
           this.setState({username:res.name||"",userEmail:res.email||"",userPicture:res.picture||""})})
         .catch(err => this.props.handlerUpdateError(true,err.message));
-      }
+    }
+}
 
   handlerSaveRecipe = () => {
     if(this.props.auth0.isAuthenticated){
@@ -111,7 +113,7 @@ class Recipe extends React.Component {
   }
 
   render() {
-    console.log(this.state.fullRecipe);
+    // console.log(this.state.fullRecipe);
     // console.log(this.props.auth0.isAuthenticated);
     return (
       <div
