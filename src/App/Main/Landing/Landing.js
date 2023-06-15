@@ -1,8 +1,6 @@
 import React from "react";
 import "./Landing.css";
 import Carousel from "react-bootstrap/Carousel";
-import Modal from 'react-bootstrap/Modal';
-import {AiOutlineCopy} from 'react-icons/ai';
 
 const imagesArray = [
   {
@@ -172,33 +170,27 @@ export default class Landing extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showImageAttribution: false,
-      creatorObject: {},
       copyColor:'black'
     };
   }
-
-  handlerImageAttribution = (object, bool,color) => {
-    this.setState({ creatorObject:object,showImageAttribution: bool, copyColor:color });
-  };
 
   render() {
     let imageElements = imagesArray
       .sort((a, b) => 0.5 - Math.random())
       .map((object, idx) => {
         return (
-          <Carousel.Item key={idx} interval={`${20000*Math.random()}`}>
+          <Carousel.Item key={idx} interval={`${20000 * Math.random()}`}>
             <img
               className="d-block w-100 landing-image"
               src={require(`../../Images/${object.image}`)}
               alt={object.creator}
-              onClick={() => this.handlerImageAttribution(object, true)}
+              onClick={() => this.props.handlerAttribution(object, true)}
             />
           </Carousel.Item>
         );
       });
 
-    // console.log(this.state.creatorObject);
+
     return (
       <div className="landing-container">
         <Carousel
@@ -209,7 +201,11 @@ export default class Landing extends React.Component {
         >
           {imageElements}
         </Carousel>
+<<<<<<< HEAD
         <div className="app-statement">
+=======
+        <div className="mission">
+>>>>>>> b57b433f9533026fb274cc780967977e3a73f722
         <h3>Our Motivation:</h3>
         <p>"The most indespensible ingredient of all good home cooking: love for those you are cooking for." - Sophia Loren</p>
         <p>
@@ -227,6 +223,7 @@ export default class Landing extends React.Component {
           you are hungry. :)
         </p>
         </div>
+<<<<<<< HEAD
         <Modal 
           show={this.state.showImageAttribution} 
           onHide={()=>this.handlerImageAttribution({},false,'black')}>
@@ -250,6 +247,8 @@ export default class Landing extends React.Component {
                 }}/></p>
           </Modal.Body>
         </Modal>
+=======
+>>>>>>> b57b433f9533026fb274cc780967977e3a73f722
       </div>
     );
   }

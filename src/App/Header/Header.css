@@ -1,5 +1,17 @@
 .navbar {
+<<<<<<< HEAD
   
   background-color:#919829 !important;
 }
 
+=======
+background-color: #919829 !important;
+font-family: 'Josefin Sans', sans-serif;
+}
+
+.navbar-brand img{
+    width: 3rem;
+    height: 3rem;
+    margin: 0 1rem;
+}
+>>>>>>> b57b433f9533026fb274cc780967977e3a73f722
