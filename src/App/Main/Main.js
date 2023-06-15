@@ -18,7 +18,7 @@ let SERVER = process.env.REACT_APP_SERVER;
 function Main(props) {
   let [state,setState] = React.useState({
     fullRecipeID:null,
-    fullRecipe:static_fullRecipe,
+    fullRecipe:{},
     displayError:false,
     error:null,
     displayAttribution:false,
@@ -39,9 +39,9 @@ function Main(props) {
             })
             .catch(err => handlerUpdateError(true,err.message))
       }
-    if (id!==state.fullRecipeID && object) {
+    if (object) {
         navigate('/recipe');
-        setState({fullRecipe:object})
+        setState({fullRecipeID:id,fullRecipe:object})
       }
   }
 
@@ -76,6 +76,7 @@ function Main(props) {
         <Route exact path="/recipe" element={
             <Recipe 
               fullRecipe={state.fullRecipe}
+              handlerFullRecipe={handlerFullRecipe}
               handlerAttribution={handlerAttribution}
               handlerUpdateError={handlerUpdateError}/>}/>
         {auth0.isAuthenticated &&

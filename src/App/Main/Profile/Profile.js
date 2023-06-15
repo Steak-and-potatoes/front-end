@@ -22,7 +22,7 @@ class Profile extends React.Component {
     
       this.props.auth0.getIdTokenClaims()
         .then(res => {
-          this.setState({username:res.name,userEmail:res.email,userPicture:res.picture})
+          this.setState({username:res.name||"",userEmail:res.email||"",userPicture:res.picture||""})
           const email = res.email;
           const config = {
             headers: {"email":`${email}`},
