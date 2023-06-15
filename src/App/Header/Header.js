@@ -1,33 +1,26 @@
 import React from "react";
 import "./Header.css";
-import Container from "react-bootstrap/Container";
 import { Navbar, NavItem } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import LoginButton from './LoginButton/LoginButton.js';
 import LogOutButton from './LogOutButton/LogOutButton.js';
 import {withAuth0} from '@auth0/auth0-react';
-import {MdFoodBank} from 'react-icons/md';
+import icon from '../Images/icon/cooking.png'
  
 class Header extends React.Component {
   render() {
-    // console.log(this.props.auth0.isAuthenticated);
     return (
-      <div className="header-container">
-        <Navbar bg="light" expand="lg">
-          <Container>
-            <Navbar.Brand href="#home"><MdFoodBank/>Go Chef Yourself!</Navbar.Brand>
 
-            {this.props.auth0.isAuthenticated?
-              <LogOutButton/>:
-              <LoginButton/>}
+        <Navbar bg="light" expand="lg">
+            <Navbar.Brand><img src={icon} alt="cooking icon" />Go Chef Yourself!</Navbar.Brand>
              
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <NavItem>
                   <Link to="/" className="nav-link">
-                    About
+                    Home
                   </Link>
                 </NavItem>
                 <NavItem>
@@ -40,16 +33,24 @@ class Header extends React.Component {
                     Recipe
                   </Link>
                 </NavItem>
-                <NavItem>
-                  <Link to="/profile" className="nav-link">
-                    Profile
-                  </Link>
-                </NavItem>
+                {this.props.auth0.isAuthenticated?
+                  <NavItem>
+                    <Link to="/profile" className="nav-link">
+                      Profile
+                    </Link>
+                  </NavItem>:
+                  null
+                  }
               </Nav>
             </Navbar.Collapse>
-          </Container>
+
+
+            {this.props.auth0.isAuthenticated?
+              <LogOutButton/>:
+              <LoginButton/>}
+              
         </Navbar>
-      </div>
+
     );
   }
 }

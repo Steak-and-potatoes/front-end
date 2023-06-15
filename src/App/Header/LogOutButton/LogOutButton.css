@@ -1,0 +1,22 @@
+.logoutButton{
+    background-color: var(--middle-green-yellow);
+    border: solid 1px var(--middle-green-yellow);
+    margin-right: 1rem;
+}
+
+.logoutButton:hover{
+    background-color: var(--middle-green-yellow);
+    border: solid 1px var(--middle-green-yellow);
+    padding: 0.2rem 1rem;
+    margin-left: -0.3rem;
+    margin-right: 0.8rem;
+}
+
+.logoutButton:active{
+    padding: 0.2rem 1rem;
+    margin-left: -0.1rem;
+    margin-right: 1.1rem;
+    font-size: 0.8rem;
+    background-color: var(--middle-green-yellow)!important;
+    border: solid 1px var(--middle-green-yellow)!important;
+}
