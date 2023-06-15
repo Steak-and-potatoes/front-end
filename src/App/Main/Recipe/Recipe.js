@@ -4,8 +4,8 @@ import Card from "react-bootstrap/Card";
 import "./Recipe.css";
 import { withAuth0 } from "@auth0/auth0-react";
 import placeholderFullRecipe from "../../../Data/recipe-placeholder.json";
-import axios from 'axios';
-import LoadingSymbol from '../LoadingSymbol/LoadingSymbol.js';
+import axios from "axios";
+import LoadingSymbol from "../LoadingSymbol/LoadingSymbol.js";
 
 let dogImageAttribution = {
   creator: "Camylla Battani",
@@ -17,62 +17,79 @@ class Recipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullRecipe: this.props.fullRecipe||placeholderFullRecipe,
-      username:"",
-      userEmail:"",
-      userPicture:"",
-      displayLoading:false,
+      fullRecipe: this.props.fullRecipe,
+      username: "",
+      userEmail: "",
+      userPicture: "",
+      displayLoading: false,
     };
   }
- 
+
   componentDidMount() {
-      this.props.auth0.getIdTokenClaims()
-        .then(res => {
-          this.setState({username:res.name||"",userEmail:res.email||"",userPicture:res.picture||""})})
-        .catch(err => this.props.handlerUpdateError(true,err.message));
-      }
+    if (this.props.auth0.isAuthenticated) {
+      this.props.auth0
+        .getIdTokenClaims()
+        .then((res) => {
+          this.setState({
+            username: res.name || "",
+            userEmail: res.email || "",
+            userPicture: res.picture || "",
+          });
+        })
+        .catch((err) => this.props.handlerUpdateError(true, err.message));
+    } else {
+      this.setState({ username: "", userEmail: "", userPicture: "" });
+    }
+  }
 
   handlerSaveRecipe = () => {
-    if(this.props.auth0.isAuthenticated){
-      this.setState({displayLoading:true})
+    if (this.props.auth0.isAuthenticated) {
+      this.setState({ displayLoading: true });
 
       let config = {
-        headers: {"email":`${this.state.userEmail}`},
-        baseURL:process.env.REACT_APP_SERVER,
-        url:'/createRecipe',
-        data:this.state.fullRecipe,
-        method:'post'
-      }
+        headers: { email: `${this.state.userEmail}` },
+        baseURL: process.env.REACT_APP_SERVER,
+        url: "/createRecipe",
+        data: this.state.fullRecipe,
+        method: "post",
+      };
 
       axios(config)
-        .then(res=>{
-          this.props.handlerFullRecipe(res.data.idMeal,res.data);
-          this.setState({fullRecipe:res.data,displayLoading:false});})
-        .catch(err => {
-          this.setState({displayLoading:false});
-          this.props.handlerUpdateError(true,err.message);})
+        .then((res) => {
+          this.props.handlerFullRecipe(res.data.idMeal, res.data);
+          this.setState({ fullRecipe: res.data, displayLoading: false });
+        })
+        .catch((err) => {
+          this.setState({ displayLoading: false });
+          this.props.handlerUpdateError(true, err.message);
+        });
     }
-  }
+  };
 
   handlerDeleteRecipe = () => {
-    if(this.props.auth0.isAuthenticated && this.state.fullRecipe._id){
-      this.setState({displayLoading:true})
+    if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id) {
+      this.setState({ displayLoading: true });
 
       let config = {
-        baseURL:process.env.REACT_APP_SERVER,
-        url:`/deleteRecipe/${this.state.fullRecipe._id}`,
-        method:'delete'
-      }
+        baseURL: process.env.REACT_APP_SERVER,
+        url: `/deleteRecipe/${this.state.fullRecipe._id}`,
+        method: "delete",
+      };
 
       axios(config)
-        .then(res=>{
-          this.props.handlerFullRecipe("",placeholderFullRecipe);
-          this.setState({fullRecipe:placeholderFullRecipe,displayLoading:false});})
-        .catch(err => {
-          this.setState({displayLoading:false});
-          this.props.handlerUpdateError(true,err.message);})
+        .then((res) => {
+          this.props.handlerFullRecipe("", placeholderFullRecipe);
+          this.setState({
+            fullRecipe: placeholderFullRecipe,
+            displayLoading: false,
+          });
+        })
+        .catch((err) => {
+          this.setState({ displayLoading: false });
+          this.props.handlerUpdateError(true, err.message);
+        });
     }
-  }
+  };
 
   handlerDisplaySaveButton = () => {
     if(this.props.auth0.isAuthenticated && !this.state.fullRecipe._id && !this.state.displayLoading) {
@@ -83,35 +100,52 @@ class Recipe extends React.Component {
       </Button>
     } else if (this.props.auth0.isAuthenticated && !this.state.fullRecipe._id && this.state.displayLoading){
       return <LoadingSymbol/>
+
     }
-  }
+  };
 
   handlerDisplayEditButton = () => {
-    if(this.props.auth0.isAuthenticated && this.state.fullRecipe._id && !this.state.displayLoading) {
-      return <Button 
-        onClick={this.handlerEditRecipe}
-        variant="secondary">
-        Edit Recipe
-      </Button>
-    } else if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id && this.state.displayLoading){
-      return <LoadingSymbol/>
+    if (
+      this.props.auth0.isAuthenticated &&
+      this.state.fullRecipe._id &&
+      !this.state.displayLoading
+    ) {
+      return (
+        <Button onClick={this.handlerEditRecipe} variant="secondary">
+          Edit Recipe
+        </Button>
+      );
+    } else if (
+      this.props.auth0.isAuthenticated &&
+      this.state.fullRecipe._id &&
+      this.state.displayLoading
+    ) {
+      return <LoadingSymbol />;
     }
-  }
+  };
 
   handlerDisplayDeleteButton = () => {
-    if(this.props.auth0.isAuthenticated && this.state.fullRecipe._id && !this.state.displayLoading) {
-      return <Button 
-        onClick={this.handlerDeleteRecipe}
-        variant="warning">
-        Delete Recipe
-      </Button>
-    } else if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id && this.state.displayLoading){
-      return <LoadingSymbol/>
+    if (
+      this.props.auth0.isAuthenticated &&
+      this.state.fullRecipe._id &&
+      !this.state.displayLoading
+    ) {
+      return (
+        <Button onClick={this.handlerDeleteRecipe} variant="warning">
+          Delete Recipe
+        </Button>
+      );
+    } else if (
+      this.props.auth0.isAuthenticated &&
+      this.state.fullRecipe._id &&
+      this.state.displayLoading
+    ) {
+      return <LoadingSymbol />;
     }
-  }
+  };
 
   render() {
-    console.log(this.state.fullRecipe);
+    // console.log(this.state.fullRecipe);
     // console.log(this.props.auth0.isAuthenticated);
     return (
       <div
@@ -190,7 +224,6 @@ class Recipe extends React.Component {
             {this.handlerDisplayEditButton()}
 
             {this.handlerDisplayDeleteButton()}
-
           </Card.Body>
         </Card>
       </div>

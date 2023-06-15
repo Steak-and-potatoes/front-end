@@ -17,11 +17,11 @@ export default class Search extends React.Component {
     this.state = {
       queryNumber: 2,
       searchByIngredients: [
-        { query: `${nanoid()}`, text: "Chicken" },
+        { query: `${nanoid()}`, text: "" },
         { query: `${nanoid()}`, text: "" }
       ],
 
-      byIngredientsArray: static_byIngredientsArray,
+      byIngredientsArray: [],
 
       accordionKey: null,
       displayLoadingSymbol:false
