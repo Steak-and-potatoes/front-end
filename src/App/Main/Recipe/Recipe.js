@@ -6,6 +6,7 @@ import { withAuth0 } from "@auth0/auth0-react";
 import placeholderFullRecipe from "../../../Data/recipe-placeholder.json";
 import axios from 'axios';
 import LoadingSymbol from '../LoadingSymbol/LoadingSymbol.js';
+import RecipeEditForm from "./RecipeEditForm";
 
 let dogImageAttribution = {
   creator: "Camylla Battani",
@@ -17,103 +18,126 @@ class Recipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullRecipe: this.props.fullRecipe ||placeholderFullRecipe,
-      username:"",
-      userEmail:"",
-      userPicture:"",
-      displayLoading:false,
+      fullRecipe: this.props.fullRecipe || placeholderFullRecipe,
+      username: "",
+      userEmail: "",
+      userPicture: "",
+      displayLoading: false,
+      displayEditForm: false,
     };
   }
- 
+
   componentDidMount() {
-      this.props.auth0.getIdTokenClaims()
-        .then(res => {
-          this.setState({username:res.name||"",userEmail:res.email||"",userPicture:res.picture||""})})
-        .catch(err => this.props.handlerUpdateError(true,err.message));
-      }
-
-  handlerSaveRecipe = () => {
-    if(this.props.auth0.isAuthenticated){
-      this.setState({displayLoading:true})
-
-      let config = {
-        headers: {"email":`${this.state.userEmail}`},
-        baseURL:process.env.REACT_APP_SERVER,
-        url:'/createRecipe',
-        data:this.state.fullRecipe,
-        method:'post'
-      }
-
-      axios(config)
-        .then(res=>{
-          this.props.handlerFullRecipe(res.data.idMeal,res.data);
-          this.setState({fullRecipe:res.data,displayLoading:false});})
-        .catch(err => {
-          this.setState({displayLoading:false});
-          this.props.handlerUpdateError(true,err.message);})
-    }
+    this.props.auth0.getIdTokenClaims()
+      .then(res => {
+        this.setState({ username: res.name || "", userEmail: res.email || "", userPicture: res.picture || "" })
+      })
+      .catch(err => this.props.handlerUpdateError(true, err.message));
   }
 
-  handlerDeleteRecipe = () => {
-    if(this.props.auth0.isAuthenticated && this.state.fullRecipe._id){
-      this.setState({displayLoading:true})
+  // save functionality
+
+  handlerSaveRecipe = () => {
+    if (this.props.auth0.isAuthenticated) {
+      this.setState({ displayLoading: true })
 
       let config = {
-        baseURL:process.env.REACT_APP_SERVER,
-        url:`/deleteRecipe/${this.state.fullRecipe._id}`,
-        method:'delete'
+        headers: { "email": `${this.state.userEmail}` },
+        baseURL: process.env.REACT_APP_SERVER,
+        url: '/createRecipe',
+        data: this.state.fullRecipe,
+        method: 'post'
       }
 
       axios(config)
-        .then(res=>{
-          this.props.handlerFullRecipe("",placeholderFullRecipe);
-          this.setState({fullRecipe:placeholderFullRecipe,displayLoading:false});})
+        .then(res => {
+          this.props.handlerFullRecipe(res.data.idMeal, res.data);
+          this.setState({ fullRecipe: res.data, displayLoading: false });
+        })
         .catch(err => {
-          this.setState({displayLoading:false});
-          this.props.handlerUpdateError(true,err.message);})
+          this.setState({ displayLoading: false });
+          this.props.handlerUpdateError(true, err.message);
+        })
     }
   }
 
   handlerDisplaySaveButton = () => {
-    if(this.props.auth0.isAuthenticated && !this.state.fullRecipe._id && !this.state.displayLoading) {
-      return <Button 
+    if (this.props.auth0.isAuthenticated && !this.state.fullRecipe._id && !this.state.displayLoading) {
+      return <Button
         onClick={this.handlerSaveRecipe}
         variant="primary">
         Save Recipe
       </Button>
-    } else if (this.props.auth0.isAuthenticated && !this.state.fullRecipe._id && this.state.displayLoading){
-      return <LoadingSymbol/>
+    } else if (this.props.auth0.isAuthenticated && !this.state.fullRecipe._id && this.state.displayLoading) {
+      return <LoadingSymbol />
+    }
+  }
+
+  // edit/update funcitonality
+
+  handlerEditRecipe = () => {
+    if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id) {
+      this.setState({ displayEditForm: true })
     }
   }
 
   handlerDisplayEditButton = () => {
-    if(this.props.auth0.isAuthenticated && this.state.fullRecipe._id && !this.state.displayLoading) {
-      return <Button 
+    if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id && !this.state.displayLoading) {
+      return <Button
         onClick={this.handlerEditRecipe}
         variant="secondary">
         Edit Recipe
       </Button>
-    } else if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id && this.state.displayLoading){
-      return <LoadingSymbol/>
+    } else if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id && this.state.displayLoading) {
+      return <LoadingSymbol />
+    }
+  }
+
+  // delete functionality
+
+  handlerDeleteRecipe = () => {
+    if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id) {
+      this.setState({ displayLoading: true })
+
+      let config = {
+        baseURL: process.env.REACT_APP_SERVER,
+        url: `/deleteRecipe/${this.state.fullRecipe._id}`,
+        method: 'delete'
+      }
+
+      axios(config)
+        .then(res => {
+          this.props.handlerFullRecipe("", placeholderFullRecipe);
+          this.setState({ fullRecipe: placeholderFullRecipe, displayLoading: false });
+        })
+        .catch(err => {
+          this.setState({ displayLoading: false });
+          this.props.handlerUpdateError(true, err.message);
+        })
     }
   }
 
   handlerDisplayDeleteButton = () => {
-    if(this.props.auth0.isAuthenticated && this.state.fullRecipe._id && !this.state.displayLoading) {
-      return <Button 
+    if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id && !this.state.displayLoading) {
+      return <Button
         onClick={this.handlerDeleteRecipe}
         variant="warning">
         Delete Recipe
       </Button>
-    } else if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id && this.state.displayLoading){
-      return <LoadingSymbol/>
+    } else if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id && this.state.displayLoading) {
+      return <LoadingSymbol />
     }
   }
 
   render() {
     console.log(this.state.fullRecipe);
-    // console.log(this.props.auth0.isAuthenticated);
+    console.log(this.state.fullRecipe.strInstructions);
     return (
+      this.state.displayEditForm ? 
+      <RecipeEditForm 
+        fullRecipe={this.state.fullRecipe}
+        closeEditForm={() => this.setState({ displayEditForm : false })}
+      /> : 
       <div
         className="recipe-container"
         style={{

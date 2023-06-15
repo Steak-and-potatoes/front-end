@@ -29,7 +29,7 @@ function Main(props) {
   let auth0 = useAuth0();
 
   function handlerFullRecipe(id,object=null) {
-    if(id!==state.fullRecipeID && object===null){
+    if(id!==state.fullRecipeID && object===null){ //for search page
           let url = `${SERVER}/recipe?id=${id}`;
           axios.get(url)
             .then(res => {
@@ -39,7 +39,7 @@ function Main(props) {
             })
             .catch(err => handlerUpdateError(true,err.message))
       }
-    if (object) {
+    if (object) {      // for profile and recipe page
         navigate('/recipe');
         setState({fullRecipeID:id,fullRecipe:object})
       }

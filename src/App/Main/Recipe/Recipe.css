@@ -12,3 +12,12 @@ img{
     height: 425px;
 }
 
+  /* edit form */
+
+  .card-body form {
+    width: 100%;
+  }
+
+  .card-body h5{
+    font-family: fantasy;
+  }
