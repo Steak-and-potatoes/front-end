@@ -17,24 +17,37 @@ class Recipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullRecipe: placeholderFullRecipe,
+      fullRecipe: this.props.fullRecipe ||placeholderFullRecipe,
+      username:"",
+      userEmail:"",
+      userPicture:"",
       displayLoading:false
     };
   }
+ 
+  componentDidMount() {
+      this.props.auth0.getIdTokenClaims()
+        .then(res => {
+          this.setState({username:res.name||"",userEmail:res.email||"",userPicture:res.picture||""})})
+        .catch(err => this.props.handlerUpdateError(true,err.message));
+      }
 
   handlerSaveRecipe = () => {
     if(this.props.auth0.isAuthenticated){
       this.setState({displayLoading:true})
 
       let config = {
+        headers: {"email":`${this.state.userEmail}`},
         baseURL:process.env.REACT_APP_SERVER,
-        url:'/saveRecipe',
+        url:'/createRecipe',
         data:this.state.fullRecipe,
         method:'post'
       }
 
       axios(config)
-        .then(res=>this.setState({fullRecipe:res.data,displayLoading:false}))
+        .then(res=>{
+          this.props.handlerFullRecipe(res.data.idMeal,res.data);
+          this.setState({fullRecipe:res.data,displayLoading:false});})
         .catch(err => {
           this.setState({displayLoading:false});
           this.props.handlerUpdateError(true,err.message);})
@@ -52,7 +65,9 @@ class Recipe extends React.Component {
       }
 
       axios(config)
-        .then(res=>this.setState({fullRecipe:placeholderFullRecipe,displayLoading:false}))
+        .then(res=>{
+          this.props.handlerFullRecipe("",placeholderFullRecipe);
+          this.setState({fullRecipe:placeholderFullRecipe,displayLoading:false});})
         .catch(err => {
           this.setState({displayLoading:false});
           this.props.handlerUpdateError(true,err.message);})
@@ -96,7 +111,7 @@ class Recipe extends React.Component {
   }
 
   render() {
-    // console.log(this.state.fullRecipe._id);
+    console.log(this.state.fullRecipe);
     // console.log(this.props.auth0.isAuthenticated);
     return (
       <div
