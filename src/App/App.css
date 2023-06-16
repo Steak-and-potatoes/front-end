@@ -4,6 +4,7 @@
     --anti-flash-white: #f2f4f3;
     --middle-green-yellow: #b6c454;
     --swamp-city: #91972a;
+    --red:#C4545C;
 }
 
 body {
@@ -25,5 +26,90 @@ body {
     background-color: var(--straw);
 }
 
+/* search buttons on search and recipe accordion */
 
+.tutorial-button{
+    padding: 0.75rem 1.25rem;
+    background-color: var(--middle-green-yellow);
+    border: 1px solid var(--middle-green-yellow);
+  }
+  
+.tutorial-button:hover{
+padding: 0.5rem 1.45rem;
+margin: 0.2rem 0 0.3rem;
+background-color: var(--middle-green-yellow);
+border: 1px solid var(--middle-green-yellow);
+}
+
+.tutorial-button:active{
+padding: 0.5rem 1.45rem;
+margin: 0.4rem 0.3rem 0.4rem 0;
+font-size: 0.8rem;
+background-color: var(--middle-green-yellow);
+border: 1px solid var(--middle-green-yellow);
+}
+
+.save-button{
+padding: 0.75rem 1.25rem;
+background-color: var(--swamp-city);
+border: 1px solid var(--swamp-city);
+}
+
+.save-button:hover{
+padding: 0.5rem 1.45rem;
+margin: 0.2rem 0 0.3rem;
+background-color: var(--swamp-city);
+border: 1px solid var(--swamp-city);
+}
+
+.save-button:active{
+padding: 0.5rem 1.45rem;
+margin: 0.4rem 0.3rem 0.4rem 0;
+font-size: 0.8rem;
+background-color: var(--swamp-city);
+border: 1px solid var(--swamp-city);
+}
+
+.edit-button{
+padding: 0.75rem 1.25rem;
+background-color: var(--middle-green-yellow);
+border: 1px solid var(--middle-green-yellow);
+}
+
+.edit-button:hover{
+padding: 0.5rem 1.45rem;
+margin: 0.2rem 0 0.3rem;
+background-color: var(--middle-green-yellow);
+border: 1px solid var(--middle-green-yellow);
+}
+
+.edit-button:active{
+padding: 0.5rem 1.45rem;
+margin: 0.4rem 0.3rem 0.4rem 0;
+font-size: 0.8rem;
+background-color: var(--middle-green-yellow);
+border: 1px solid var(--middle-green-yellow);
+}
+
+
+.delete-button{
+padding: 0.75rem 1.25rem;
+background-color: var(--red);
+border: 1px solid var(--red);
+}
+
+.delete-button:hover{
+padding: 0.5rem 1.45rem;
+margin: 0.2rem 0 0.3rem;
+background-color: var(--red);
+border: 1px solid var(--red);
+}
+
+.delete-button:active{
+padding: 0.5rem 1.45rem;
+margin: 0.4rem 0.3rem 0.4rem 0;
+font-size: 0.8rem;
+background-color: var(--red);
+border: 1px solid var(--red);
+}
 

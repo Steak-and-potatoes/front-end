@@ -11,35 +11,45 @@ class ProfileCard extends React.Component {
 
   render() {
     return (
-      <div className="profile-card-container">
+      <div 
+        className="profile-card-container">
         {this.props.displayProfileCard ? (
-          <Card style={{ width: "18rem" }}>
+          <Card
+            className="profile-card">
             <Card.Img
+              className="profile-picture"
               variant="top"
               src={this.props.userPicture}
               alt={this.props.username}
             />
-            <Card.Body>
-              <Card.Title>{`Username: ${
+            <Card.Body
+              className="profile-card-body">
+              <Card.Title
+                className="profile-card-text"
+                >{`Username: ${
                 this.props.username || "unavailable"
               }`}</Card.Title>
-              <Card.Text>{`Email: ${
+              <Card.Text
+                className="profile-card-text">{`Email: ${
                 this.props.userEmail || "unavailable"
               }`}</Card.Text>
               <Button
+                className="edit-button  profile-card-button"
                 variant="primary"
-                onClick={this.props.handlerUpdateProfileCard}
+                onClick={()=> this.props.handlerUpdateProfileCard(false)}
               >
                 Hide Profile
               </Button>
             </Card.Body>
           </Card>
         ) : (
-          <Card style={{ width: "18rem" }}>
-            <Card.Body>
+          <Card className="profile-card">
+            <Card.Body
+              className="profile-card-body">
               <Button
+                className="edit-button profile-card-button"
                 variant="primary"
-                onClick={this.props.handlerUpdateProfileCard}
+                onClick={()=>this.props.handlerUpdateProfileCard(true)}
               >
                 Show Profile
               </Button>

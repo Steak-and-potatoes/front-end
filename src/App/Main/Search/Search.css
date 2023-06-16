@@ -1,25 +1,25 @@
 .search-container{
-    background-image: url('../../Images/bokchoy.jpg');
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     margin-top: 1rem;
 }
 
-h4 {
-    padding-top: 5%;
-    padding-bottom: 2%;
-    color:antiquewhite
+.form-title {
+    margin:0 0 0.5em 0.25em;
+}
+.form-field-container {
+    display:flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    align-items:center;
 }
 
-form{
-    width: 50%;
+.fa-minus {
+    margin: 0 0 0 1em;
 }
 
-hr{
-    border: 1px solid var(--swamp-city);
-    width: 75%;
+.hr-search {
+    border: 2px solid var(--swamp-city);
+    max-width: 75%;
+    margin:2em auto 2em auto;
 }
 
 .minus-ing {
@@ -28,11 +28,13 @@ hr{
 
 .search-buttons{
     display: flex;
-    justify-content: space-between;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content: space-evenly;
     align-items: flex-end;
 }
 
-.addButton{
+/* .addButton{
     padding: 0.5rem 0.75rem;
     background-color: var(--middle-green-yellow);
     border: 1px solid var(--middle-green-yellow);
@@ -73,13 +75,8 @@ hr{
     border: 1px solid var(--swamp-city)!important;
     margin: 0.4rem 0.3rem 0.4rem 0;
     font-size: 0.8rem;
-}
+} */
 
-.recipes{
-    width: 50%;
-    padding-top: 5% ;
-    padding-bottom: 10%;
-}
 
 
 

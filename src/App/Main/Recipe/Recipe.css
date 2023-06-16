@@ -1,14 +1,35 @@
 
+.recipe-card {
+  width:80%;
+  background-color:var(--anti-flash-white);
+  border:2px solid var(--swamp-city);
+  margin:2em 0 2em 0;
+}
 
-div.recipe-container {
-    padding-top: 50px;
-    padding-right: 30px;
-    padding-bottom: 50px;
-    padding-left: 80px;
-  }
+.recipe-card-image{
+    width: 100%;
+    object-fit:cover;
+    height:400px;
+}
 
-img{
-    width: 425px;
-    height: 425px;
+.recipe-body{
+  margin:0 2em 2em 2em;
+}
+
+.hr-recipe {
+  border: 2px solid var(--swamp-city);
+  width: 98%;
+  margin:1em auto 1em auto;
+}
+
+.Cardpad {
+  border: 3px solid var(--swamp-city);
+}
+
+.recipe-buttons-container {
+  display:flex;
+  flex-direction:row;
+  flex-wrap:nowrap;
+  justify-content:space-evenly;
 }
 
