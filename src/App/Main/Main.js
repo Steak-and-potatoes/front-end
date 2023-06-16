@@ -44,7 +44,7 @@ function Main(props) {
         navigate('/recipe');
       }
     if (id===false && object){
-      console.log('triggered');
+      // console.log('triggered');
       setState({fullRecipeID:null,fullRecipe:placeholderFullRecipe})
     }
 
@@ -58,7 +58,7 @@ function Main(props) {
     setState({ attributionObject:object,displayAttribution: bool });
   };
 
-  console.log(state.fullRecipe);
+  // console.log(state.fullRecipe);
 
   return (
     <div className="main-container">
