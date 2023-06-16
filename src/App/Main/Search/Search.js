@@ -5,7 +5,7 @@ import { FaMinus } from "react-icons/fa";
 import { nanoid } from "nanoid";
 import axios from "axios";
 import "./Search.css";
-import static_byIngredientsArray from "../../../Data/data-multiple-ingredients.json";
+// import static_byIngredientsArray from "../../../Data/data-multiple-ingredients.json";
 import RecipesAccordion from "../RecipesAccordion/RecipesAccordion.js";
 import LoadingSymbol from '../LoadingSymbol/LoadingSymbol.js'
 import Container from 'react-bootstrap/Container';
@@ -24,7 +24,7 @@ export default class Search extends React.Component {
         { query: `${nanoid()}`, text: "" }
       ],
 
-      byIngredientsArray: static_byIngredientsArray,
+      byIngredientsArray: [],
 
       accordionKey: null,
       displayLoadingSymbol:false
