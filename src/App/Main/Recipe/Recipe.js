@@ -173,21 +173,11 @@ class Recipe extends React.Component {
               <Col className="recipe-col" xs={10}>
                 <Card 
                   className="recipe-card">
-                  {this.state.fullRecipe.strMealThumb === "dogDonuteImage" ? (
-                    <Card.Img
-                      className="recipe-card-image"
-                      variant="top"
-                      onClick={() =>
-                        this.props.handlerAttribution(dogImageAttribution, true)
-                      }
-                      src={require("../../Images/camylla-battani-JgdgKvYgiwI-unsplash.jpg")}
-                    />
-                  ) : (
+
                     <Card.Img 
                       variant="top" 
                       className="recipe-card-image"
-                      src={this.state.fullRecipe.strMealThumb||""} />
-                  )}
+                      src={this.props.fullRecipe.strMealThumb||""} />
 
                   <Card.Body
                     className="recipe-body">
