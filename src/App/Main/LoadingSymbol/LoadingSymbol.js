@@ -7,7 +7,7 @@ export default class LoadingSymbol extends React.Component {
   render() {
     return (
       <div className="loading-symbol-container">
-        <Button variant="primary" disabled>
+        <Button disabled>
           <Spinner
             as="span"
             animation="grow"
