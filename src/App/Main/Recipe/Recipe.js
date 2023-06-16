@@ -175,7 +175,7 @@ class Recipe extends React.Component {
   };
 
   render() {
-    console.log(this.state.fullRecipe);
+    console.log(this.state.fullRecipe.strMealThumb);
     // console.log(this.props.auth0.isAuthenticated);
     return (
       this.state.displayEditForm ?
