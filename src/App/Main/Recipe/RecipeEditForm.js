@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import "./Recipe.css";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -15,33 +16,70 @@ class RecipeEditForm extends React.Component {
     }
 
     modifyRecipe = (e, id) => {
-        e.preventDefault(); //we might want this as it might take us back to the recipe page
+        // e.preventDefault(); 
         console.log(id);
 
-        // let idMeal = this.props.fullRecipe.idMeal;
-        // let strMeal = e.target.strMealInput.value || this.props.fullRecipe.strMeal;
-        // let strCategory = this.props.fullRecipe.strCategory;
-        // let strArea = e.target.strAreaInput.value || this.props.fullRecipe.strArea;
-        // let strInstructions = e.target.strInstructionsInput.value || this.props.fullRecipe.strInstructions;
-        // let strMealThumb = this.props.fullRecipe.strMealThumb;
-        // let strYoutube = this.props.fullRecipe.strYoutube;
-        // let arrayIngredients = []; arrayIngredients = this.updateArrayIngredients(e) || arrayIngredients.push(...this.props.fullRecipe.arrayIngredients);
-        // // console.log(arrayIngredients);
-        // let strUserEmail = this.props.fullRecipe.strUserEmail;
-        // let strNotes = e.target.strNotesInput.value || this.props.fullRecipe.strNotes;
+        let idMealUpdate = this.props.fullRecipe.idMeal;
+        let strMealUpdate = e.target.strMealInput.value || this.props.fullRecipe.strMeal;
+        let strCategoryUpdate = this.props.fullRecipe.strCategory;
+        let strAreaUpdate = e.target.strAreaInput.value || this.props.fullRecipe.strArea;
+        let strInstructionsUpdate = e.target.strInstructionsInput.value || this.props.fullRecipe.strInstructions;
+        let strMealThumbUpdate = this.props.fullRecipe.strMealThumb;
+        let strYoutubeUpdate = this.props.fullRecipe.strYoutube;
+        let arrayIngredientsUpdate = []; arrayIngredientsUpdate = this.updateArrayIngredients(e) || arrayIngredientsUpdate.push(...this.props.fullRecipe.arrayIngredients);
+        // console.log(arrayIngredients);
+        let strUserEmailUpdate = this.props.fullRecipe.strUserEmail;
+        let strNotesUpdate = e.target.strNotesInput.value || this.props.fullRecipe.strNotes;
 
-        
-    } //remember to add closeEditForm() at the end
+        let modifyRecipe = {
+            idMeal: idMealUpdate,
+            strMeal: strMealUpdate,
+            strCategory: strCategoryUpdate,
+            strArea: strAreaUpdate,
+            strInstructions: strInstructionsUpdate,
+            strMealThumb: strMealThumbUpdate,
+            strYoutube: strYoutubeUpdate,
+            arrayIngredients: arrayIngredientsUpdate,
+            strUserEmail: strUserEmailUpdate,
+            strNotes: strNotesUpdate
+        };
 
-    updateArrayIngredients = (e) => {
-        let array = [];
-        const ingredientNum = this.props.fullRecipe.arrayIngredients.length + 2;
-        for (let i = 1; i < ingredientNum; i++){
-            if(i === 1) {continue};
-            array.push(e.target[i].value);
-        }
-        return array;
+        this.props.auth0.getIdTokenClaims()
+            .then(res => {
+                let jwt = res.__raw;
+                let config = {
+                    headers: { 'Authorization': `Bearer ${jwt}` },
+                    method: 'put',
+                    data: modifyRecipe,
+                    baseURL: process.env.REACT_APP_SERVER,
+                    url: `/modifyRecipe/${id}`
+                };
+
+                axios(config)
+                    .then((res) => {
+                        let modifiedResponseRecipe = res.data;
+                        // console.log('i think it updated:::', modifiedResponseRecipe);
+                        this.props.handlerUpdateFullRecipe(modifiedResponseRecipe);
+                        this.props.handlerFullRecipe(modifiedResponseRecipe.idMeal, modifiedResponseRecipe)
+                    })
+                    .catch((err) => console.error(err.message));
+            })
+            .catch((err) => console.error(err.message)); 
+
+
+            
+        this.props.closeEditForm(); //remember to add closeEditForm() at the end
     }
+
+        updateArrayIngredients = (e) => {
+            let array = [];
+            const ingredientNum = this.props.fullRecipe.arrayIngredients.length + 2;
+            for (let i = 1; i < ingredientNum; i++) {
+                if (i === 1) { continue };
+                array.push(e.target[i].value);
+            }
+            return array;
+        }
 
     render() {
         return (
@@ -93,15 +131,19 @@ class RecipeEditForm extends React.Component {
 
                                     <Form.Group className="mb-3" controlId="strInstructionsInput">
                                         <Form.Label>Instructions:</Form.Label>
-                                        <Form.Control as="textarea" rows={10} value={this.state.instructions} onChange={(e) => this.setState({ instructions: e.target.value })} />
+                                        <Form.Control 
+                                            as="textarea" 
+                                            rows={10} 
+                                            value={this.state.instructions} 
+                                            onChange={(e) => this.setState({ instructions: e.target.value })} />
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="strNotesInput">
                                         <Form.Label>{this.props.fullRecipe.strNotes ? "Notes:" : "Add Notes ?"}</Form.Label>
-                                        <Form.Control 
-                                            as="textarea" 
-                                            rows={5} 
-                                            value={this.props.fullRecipe.notes ? this.props.fullRecipe.notes : ""} 
+                                        <Form.Control
+                                            as="textarea"
+                                            rows={5}
+                                            value={this.state.notes}
                                             onChange={(e) => this.setState({ notes: e.target.value })} />
                                     </Form.Group>
                                 </div>
@@ -111,7 +153,7 @@ class RecipeEditForm extends React.Component {
                                     Update Recipe
                                 </Button>
                                 <Button
-                                // onClick={}
+                                    onClick={this.props.closeEditForm}
                                 >
                                     Cancel
                                 </Button>
