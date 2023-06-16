@@ -5,7 +5,7 @@ import { FaMinus } from "react-icons/fa";
 import { nanoid } from "nanoid";
 import axios from "axios";
 import "./Search.css";
-// import static_byIngredientsArray from "../../../Data/data-multiple-ingredients.json";
+import placeholderFullRecipe from '../../../Data/recipe-placeholder.json';
 import RecipesAccordion from "../RecipesAccordion/RecipesAccordion.js";
 import LoadingSymbol from '../LoadingSymbol/LoadingSymbol.js'
 import Container from 'react-bootstrap/Container';
@@ -105,15 +105,18 @@ export default class Search extends React.Component {
             } else {
               this.props.handlerUpdateError(false, null);
               this.setState({ byIngredientsArray: res.data.meals, displayLoadingSymbol:false });
+              this.props.handlerFullRecipe(false,placeholderFullRecipe);
             }
           })
           .catch((error) => {
             this.setState({displayLoadingSymbol:false});
             this.props.handlerUpdateError(true, error.message);});
+            this.props.handlerFullRecipe(false,placeholderFullRecipe);
       }
     } catch (error) {
       this.setState({displayLoadingSymbol:false});
       this.props.handlerUpdateError(true, error.message);
+      this.props.handlerFullRecipe(false,placeholderFullRecipe);
     }
   };
 
