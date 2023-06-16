@@ -26,6 +26,7 @@ class Recipe extends React.Component {
       userEmail: "",
       userPicture: "",
       displayLoading: false,
+      displayEditForm: false,
     };
   }
 
@@ -141,6 +142,12 @@ class Recipe extends React.Component {
       return <LoadingSymbol />;
     }
   };
+
+  handlerEditRecipe = () => {
+    if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id) {
+      this.setState({ displayEditForm: true })
+    }
+  }
 
   handlerDisplayDeleteButton = () => {
     if (
