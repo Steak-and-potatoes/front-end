@@ -21,7 +21,7 @@ export default class Search extends React.Component {
         { query: `${nanoid()}`, text: "" }
       ],
 
-      byIngredientsArray: [],
+      byIngredientsArray: static_byIngredientsArray,
 
       accordionKey: null,
       displayLoadingSymbol:false
@@ -142,10 +142,14 @@ export default class Search extends React.Component {
         <Form onSubmit={this.handlerOnSubmit}>
           {formGroups}
           <div className="search-buttons">
-            <Button className="addButton" onClick={this.handlerAddSearchField}>
+            <Button 
+              className="edit-button" 
+              onClick={this.handlerAddSearchField}>
               Add Ingredient
             </Button>
-            <Button className="searchButton" type="submit">
+            <Button 
+              className="save-button" 
+              type="submit">
               Search
             </Button>
           </div>

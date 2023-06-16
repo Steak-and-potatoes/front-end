@@ -20,7 +20,7 @@ hr{
     align-items: flex-end;
 }
 
-.addButton{
+/* .addButton{
     padding: 0.5rem 0.75rem;
     background-color: var(--middle-green-yellow);
     border: 1px solid var(--middle-green-yellow);
@@ -61,7 +61,7 @@ hr{
     border: 1px solid var(--swamp-city)!important;
     margin: 0.4rem 0.3rem 0.4rem 0;
     font-size: 0.8rem;
-}
+} */
 
 .recipes{
     width: 50%;

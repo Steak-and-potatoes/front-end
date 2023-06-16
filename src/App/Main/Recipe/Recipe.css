@@ -1,4 +1,34 @@
+/* --tuscan: #e6d3a3;
+--straw: #d8d174;
+--anti-flash-white: #f2f4f3;
+--middle-green-yellow: #b6c454;
+--swamp-city: #91972a; */
 
+
+
+.recipe-card {
+  width:80%;
+  background-color:var(--anti-flash-white);
+  border:2px solid var(--swamp-city);
+  margin:2em 0 2em 0;
+}
+
+.recipe-card-image{
+    width: 100%;
+    object-fit:cover;
+    height:400px;
+}
+
+.recipe-body{
+  margin:0 2em 2em 2em;
+}
+
+hr{
+  border: 1px solid var(--swamp-city);
+  width: 98%;
+  margin:1em auto 1em auto;
+
+}
 
 div.recipe-container {
     padding-top: 50px;
@@ -13,51 +43,16 @@ img{
     height: 425px;
 }
 
-.searchButton{
-  padding: 0.75rem 1.25rem;
-  background-color: var(--swamp-city);
-  border: 1px solid var(--swamp-city);
-}
-
-.searchButton:hover{
-  padding: 0.5rem 1.45rem;
-  background-color: var(--swamp-city);
-  border: 1px solid var(--swamp-city);
-  margin: 0.2rem 0 0.3rem;
-}
-
-.searchButton:active{
-  padding: 0.5rem 1.45rem;
-  background-color: var(--swamp-city)!important;
-  border: 1px solid var(--swamp-city)!important;
-  margin: 0.4rem 0.3rem 0.4rem 0;
-  font-size: 0.8rem;
-}
-
-.addButton{
-  padding: 0.5rem 0.75rem;
-  background-color: var(--middle-green-yellow);
-  border: 1px solid var(--middle-green-yellow);
-}
-
-.addButton:hover{
-  background-color: var(--middle-green-yellow);
-  border: 1px solid var(--middle-green-yellow);
-  padding: 0.2rem 1rem;
-  margin-bottom: 0.15rem;
-}
-
-.addButton:active{
-  background-color: var(--middle-green-yellow)!important;
-  border: 1px solid var(--middle-green-yellow)!important;
-  padding: 0.2rem 1rem;
-  margin-bottom: 0.25rem;
-  margin-left: 0.6rem;
-  font-size: 0.8rem;
-}
-
 .Cardpad {
   border: 3px solid var(--swamp-city);
   width: 80%;
   padding: 20px;
 }
+
+.recipe-buttons-container {
+  display:flex;
+  flex-direction:row;
+  flex-wrap:nowrap;
+  justify-content:space-evenly;
+}
+

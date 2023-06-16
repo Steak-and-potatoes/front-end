@@ -18,7 +18,7 @@ let SERVER = process.env.REACT_APP_SERVER;
 function Main(props) {
   let [state,setState] = React.useState({
     fullRecipeID:null,
-    fullRecipe:placeholderFullRecipe||{},
+    fullRecipe:placeholderFullRecipe,
     displayError:false,
     error:null,
     displayAttribution:false,
