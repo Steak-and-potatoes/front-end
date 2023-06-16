@@ -1,0 +1,26 @@
+.profile-card-container {
+  margin: 2em auto 2em auto;
+}
+
+.profile-card {
+  border:2px solid var(--swamp-city);
+}
+
+.profile-card-body {
+  display:flex;
+  flex-direction:column;
+  flex-wrap:nowrap;
+  align-items:center;
+}
+
+.profile-card-text{
+  align-self:center;
+}
+
+.profile-card-button{
+  align-self:center;
+}
+
+.profile-picture {
+  object-fit:cover;
+}
