@@ -4,7 +4,13 @@
 --middle-green-yellow: #b6c454;
 --swamp-city: #91972a; */
 
+.recipe-container {
+  /* outline:2px solid red; */
+}
 
+.row{
+  /* outline:2px solid red; */
+}
 
 .recipe-card {
   width:80%;
@@ -23,30 +29,14 @@
   margin:0 2em 2em 2em;
 }
 
-hr{
-  border: 1px solid var(--swamp-city);
+.hr-recipe {
+  border: 2px solid var(--swamp-city);
   width: 98%;
   margin:1em auto 1em auto;
-
-}
-
-div.recipe-container {
-    padding-top: 50px;
-    padding-right: 30px;
-    padding-bottom: 50px;
-    padding-left: 80px;
-    
-  }
-
-img{
-    width: 425px;
-    height: 425px;
 }
 
 .Cardpad {
   border: 3px solid var(--swamp-city);
-  width: 80%;
-  padding: 20px;
 }
 
 .recipe-buttons-container {

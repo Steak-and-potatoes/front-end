@@ -17,6 +17,7 @@ class ProfileCard extends React.Component {
           <Card
             className="profile-card">
             <Card.Img
+              className="profile-picture"
               variant="top"
               src={this.props.userPicture}
               alt={this.props.username}
