@@ -1,0 +1,4 @@
+.loading-symbol-container button{
+    background-color: var(--swamp-city)!important;
+    border: 1px solid var(--swamp-city)!important;
+}
