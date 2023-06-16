@@ -13,8 +13,11 @@
     height: 3rem;
     margin: 0 1rem;
 }
-<<<<<<< HEAD
-=======
+
+
+.navbar-expand-md {
+    flex-wrap: wrap; 
+}
 
 .navbar-expand-md {
     flex-wrap: wrap; 
@@ -22,5 +25,3 @@
 
   /* background-color:#919829 !important; */
 
-
->>>>>>> fc11bbead39abead2a9613cc2b605a00d8e689a8

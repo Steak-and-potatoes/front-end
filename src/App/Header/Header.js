@@ -7,10 +7,7 @@ import Nav from "react-bootstrap/Nav";
 import LoginButton from './LoginButton/LoginButton.js';
 import LogOutButton from './LogOutButton/LogOutButton.js';
 import {withAuth0} from '@auth0/auth0-react';
-<<<<<<< HEAD
 
-=======
->>>>>>> fc11bbead39abead2a9613cc2b605a00d8e689a8
  
 class Header extends React.Component {
   render() {
@@ -18,13 +15,14 @@ class Header extends React.Component {
 
 
         <Navbar bg="light" expand="lg">
-<<<<<<< HEAD
 
         <Navbar.Brand><img src={require('../Images/cooking.png')} alt="cooking icon" />Go Chef Yourself!</Navbar.Brand>
-=======
+
             <Navbar.Brand><img src={require("../Images/cooking.png")} alt="cooking icon" />Go Chef Yourself!</Navbar.Brand>
->>>>>>> fc11bbead39abead2a9613cc2b605a00d8e689a8
-             
+
+
+            <Navbar.Brand><img src={require("../Images/cooking.png")} alt="cooking icon" />Go Chef Yourself!</Navbar.Brand>
+   
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">

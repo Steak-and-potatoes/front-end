@@ -22,10 +22,6 @@
     margin:2em auto 2em auto;
 }
 
-.minus-ing {
-    color: antiquewhite;
-}
-
 .search-buttons{
     display: flex;
     flex-direction:row;
