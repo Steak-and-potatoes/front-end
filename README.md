@@ -146,7 +146,7 @@ For a layer of security, we will have someone who didn't write the code double c
 
 # This is our project choice 
 
-**Go Chef Yourself**
+**Go Chef Yourself!**
 
 - Meal creator by ingredients
 - Helps you to figure out what you can make based on ingredients you already have.
