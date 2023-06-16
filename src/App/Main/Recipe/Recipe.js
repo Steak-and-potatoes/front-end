@@ -149,6 +149,10 @@ class Recipe extends React.Component {
     }
   }
 
+  handlerUpdateFullRecipe = (obj) => {
+    this.setState({ fullRecipe: obj})
+  }
+
   handlerDisplayDeleteButton = () => {
     if (
       this.props.auth0.isAuthenticated &&
@@ -173,13 +177,15 @@ class Recipe extends React.Component {
   };
 
   render() {
-    // console.log(this.state.fullRecipe);
+    console.log(this.state.fullRecipe);
     // console.log(this.props.auth0.isAuthenticated);
     return (
       this.state.displayEditForm ?
         <RecipeEditForm
           fullRecipe={this.state.fullRecipe}
           closeEditForm={() => this.setState({ displayEditForm: false })}
+          handlerFullRecipe={this.props.handlerFullRecipe}
+          handlerUpdateFullRecipe={this.handlerUpdateFullRecipe}
         /> :
         <Container className="recipe-container">
           <Row className="justify-content-md-center">
@@ -247,6 +253,16 @@ class Recipe extends React.Component {
                         <hr className="hr-recipe" />
                       </div>
                     )}
+
+
+                    {this.state.fullRecipe.strNotes && (
+                      <div className="recipe-notes recipe-div">
+                        <h4>Notes:</h4>
+                        <p>{this.state.fullRecipe.strNotes}</p>
+                        <hr className="hr-recipe" />
+                      </div>
+                    )}
+
                   </div>
                   <div className="recipe-buttons-container">
                     {this.state.fullRecipe.strYoutube && (
@@ -262,7 +278,10 @@ class Recipe extends React.Component {
                           Tutorial
                         </Button>
                       </a>
+
                     )}
+
+
 
                     {this.handlerDisplaySaveButton()}
 
