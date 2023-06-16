@@ -169,8 +169,8 @@ class Recipe extends React.Component {
     // console.log(this.props.auth0.isAuthenticated);
     return (
           <Container className="recipe-container">
-            <Row className="justify-content-md-center">
-              <Col xs={12}>
+            <Row className="justify-content-md-center recipe-row">
+              <Col className="recipe-col" xs={10}>
                 <Card 
                   className="recipe-card">
                   {this.state.fullRecipe.strMealThumb === "dogDonuteImage" ? (
