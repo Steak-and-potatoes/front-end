@@ -6,15 +6,9 @@ import { withAuth0 } from "@auth0/auth0-react";
 import placeholderFullRecipe from "../../../Data/recipe-placeholder.json";
 import axios from "axios";
 import LoadingSymbol from "../LoadingSymbol/LoadingSymbol.js";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
-let dogImageAttribution = {
-  creator: "Camylla Battani",
-  image: "camylla-battani-JgdgKvYgiwI-unsplash.jpg",
-  link: "https://unsplash.com/@camylla93",
-};
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 class Recipe extends React.Component {
   constructor(props) {
@@ -101,21 +95,20 @@ class Recipe extends React.Component {
       !this.state.displayLoading
     ) {
       return (
-            <Button 
-              className="recipe-buttons save-button"
-              onClick={this.handlerSaveRecipe} variant="primary">
-              Save Recipe
-            </Button>
+        <Button
+          className="recipe-buttons save-button"
+          onClick={this.handlerSaveRecipe}
+          variant="primary"
+        >
+          Save Recipe
+        </Button>
       );
     } else if (
       this.props.auth0.isAuthenticated &&
       !this.state.fullRecipe._id &&
       this.state.displayLoading
     ) {
-      return (
-            <LoadingSymbol />
-      )
-
+      return <LoadingSymbol />;
     }
   };
 
@@ -126,11 +119,13 @@ class Recipe extends React.Component {
       !this.state.displayLoading
     ) {
       return (
-          <Button 
-            className="recipe-buttons edit-button"
-            onClick={this.handlerEditRecipe} variant="secondary">
-            Edit Recipe
-          </Button>
+        <Button
+          className="recipe-buttons edit-button"
+          onClick={this.handlerEditRecipe}
+          variant="secondary"
+        >
+          Edit Recipe
+        </Button>
       );
     } else if (
       this.props.auth0.isAuthenticated &&
@@ -148,12 +143,13 @@ class Recipe extends React.Component {
       !this.state.displayLoading
     ) {
       return (
-            <Button 
-              className="recipe-buttons delete-button"
-              onClick={this.handlerDeleteRecipe} variant="warning">
-              Delete Recipe
-            </Button>
-        
+        <Button
+          className="recipe-buttons delete-button"
+          onClick={this.handlerDeleteRecipe}
+          variant="warning"
+        >
+          Delete Recipe
+        </Button>
       );
     } else if (
       this.props.auth0.isAuthenticated &&
@@ -168,90 +164,85 @@ class Recipe extends React.Component {
     // console.log(this.state.fullRecipe);
     // console.log(this.props.auth0.isAuthenticated);
     return (
-          <Container className="recipe-container">
-            <Row className="justify-content-md-center recipe-row">
-              <Col className="recipe-col" xs={10}>
-                <Card 
-                  className="recipe-card">
+      <Container className="recipe-container">
+        <Row className="justify-content-md-center recipe-row">
+          <Col className="recipe-col" xs={10}>
+            <Card className="recipe-card">
+              <Card.Img
+                variant="top"
+                className="recipe-card-image"
+                src={this.props.fullRecipe.strMealThumb || ""}
+              />
 
-                    <Card.Img 
-                      variant="top" 
-                      className="recipe-card-image"
-                      src={this.props.fullRecipe.strMealThumb||""} />
+              <Card.Body className="recipe-body">
+                <Card.Title className="recipe-div">
+                  <h2>{this.state.fullRecipe.strMeal}</h2>
+                </Card.Title>
+                <div>
+                  <div className="recipe-div">
+                    {this.state.fullRecipe.strArea && (
+                      <p>
+                        <strong>Origins: </strong>
+                        {this.state.fullRecipe.strArea}
+                      </p>
+                    )}
+                    <hr className="hr-recipe" />
+                  </div>
 
-                  <Card.Body
-                    className="recipe-body">
-                    <Card.Title 
-                      className="recipe-div">
-                      <h2>{this.state.fullRecipe.strMeal}</h2>
-                    </Card.Title>
-                    <div>
-                      <div 
-                        className="recipe-div">
-                        {this.state.fullRecipe.strArea && (
-                          <p>
-                            <strong>Origins: </strong>
-                            {this.state.fullRecipe.strArea}
-                          </p>
+                  {this.state.fullRecipe.arrayIngredients && (
+                    <div className="recipe-list recipe-div">
+                      <h4>Ingredients:</h4>
+                      <ul>
+                        {this.state.fullRecipe.arrayIngredients.map(
+                          (ingredient, idx) => {
+                            return <li key={idx}>{ingredient}</li>;
+                          }
                         )}
-                        <hr className="hr-recipe"/>
-                      </div>
-
-
-                      {this.state.fullRecipe.arrayIngredients && (
-                        <div className="recipe-list recipe-div">
-                          <h4>Ingredients:</h4>
-                          <ul>
-                            {this.state.fullRecipe.arrayIngredients.map(
-                              (ingredient, idx) => {
-                                return <li key={idx}>{ingredient}</li>;
-                              }
-                            )}
-                          </ul>
-                          <hr className="hr-recipe"/>
-                        </div>
-                      )}
-                    
-
-                      {this.state.fullRecipe.strInstructions && (
-                        <div className="recipe-instructions recipe-div">
-                          <h4>Instructions:</h4>
-                          {this.state.fullRecipe.strInstructions
-                            .split("\r\n")
-                            .map((sentence, idx) => (
-                              <p key={idx}>{sentence}</p>
-                            ))}
-                            <hr className="hr-recipe"/>
-                        </div>
-                      )}
+                      </ul>
+                      <hr className="hr-recipe" />
                     </div>
-                    <div className="recipe-buttons-container">
-                      {this.state.fullRecipe.strYoutube && (
-                          <a
-                            className=""
-                            href={`${this.state.fullRecipe.strYoutube}`}
-                            rel="noreferrer"
-                            target="_blank"
-                          >
-                            <Button 
-                              className="recipe-buttons save-button"
-                              variant="primary">
-                              Tutorial
-                            </Button>
-                          </a>
-                        )}
+                  )}
 
-                      {this.handlerDisplaySaveButton()}
-
-                      {this.handlerDisplayEditButton()}
-
-                      {this.handlerDisplayDeleteButton()}
+                  {this.state.fullRecipe.strInstructions && (
+                    <div className="recipe-instructions recipe-div">
+                      <h4>Instructions:</h4>
+                      {this.state.fullRecipe.strInstructions
+                        .split("\r\n")
+                        .map((sentence, idx) => (
+                          <p key={idx}>{sentence}</p>
+                        ))}
+                      <hr className="hr-recipe" />
                     </div>
-                  </Card.Body>
-                </Card>
-              </Col>
-            </Row>
-          </Container>
+                  )}
+                </div>
+                <div className="recipe-buttons-container">
+                  {this.state.fullRecipe.strYoutube && (
+                    <a
+                      className=""
+                      href={`${this.state.fullRecipe.strYoutube}`}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <Button
+                        className="recipe-buttons save-button"
+                        variant="primary"
+                      >
+                        Tutorial
+                      </Button>
+                    </a>
+                  )}
+
+                  {this.handlerDisplaySaveButton()}
+
+                  {this.handlerDisplayEditButton()}
+
+                  {this.handlerDisplayDeleteButton()}
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
