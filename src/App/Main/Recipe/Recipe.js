@@ -9,7 +9,7 @@ import LoadingSymbol from "../LoadingSymbol/LoadingSymbol.js";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import RecipeEditForm from "./RecipeEditForm";
+import RecipeEditForm from "./recipeEditForm";
 
 let dogImageAttribution = {
   creator: "Camylla Battani",
