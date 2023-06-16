@@ -181,26 +181,26 @@ class Recipe extends React.Component {
           fullRecipe={this.state.fullRecipe}
           closeEditForm={() => this.setState({ displayEditForm: false })}
         /> :
-        <Container className="recipe-container">
-          <Row className="justify-content-md-center">
-            <Col xs={12}>
-              <Card
-                className="recipe-card">
-                {this.state.fullRecipe.strMealThumb === "dogDonuteImage" ? (
-                  <Card.Img
-                    className="recipe-card-image"
-                    variant="top"
-                    onClick={() =>
-                      this.props.handlerAttribution(dogImageAttribution, true)
-                    }
-                    src={require("../../Images/camylla-battani-JgdgKvYgiwI-unsplash.jpg")}
-                  />
-                ) : (
-                  <Card.Img
-                    variant="top"
-                    className="recipe-card-image"
-                    src={this.state.fullRecipe.strMealThumb || ""} />
-                )}
+          <Container className="recipe-container">
+            <Row className="justify-content-md-center recipe-row">
+              <Col className="recipe-col" xs={10}>
+                <Card 
+                  className="recipe-card">
+                  {this.state.fullRecipe.strMealThumb === "dogDonuteImage" ? (
+                    <Card.Img
+                      className="recipe-card-image"
+                      variant="top"
+                      onClick={() =>
+                        this.props.handlerAttribution(dogImageAttribution, true)
+                      }
+                      src={require("../../Images/camylla-battani-JgdgKvYgiwI-unsplash.jpg")}
+                    />
+                  ) : (
+                    <Card.Img 
+                      variant="top" 
+                      className="recipe-card-image"
+                      src={this.state.fullRecipe.strMealThumb||""} />
+                  )}
 
                 <Card.Body
                   className="recipe-body">
