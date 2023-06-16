@@ -5,6 +5,9 @@ import RecipesAccordion from '../RecipesAccordion/RecipesAccordion.js';
 import axios from 'axios';
 import {withAuth0} from '@auth0/auth0-react';
 import ProfileCard from './ProfileCard/ProfileCard.js';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 class Profile extends React.Component {
   constructor(props){
@@ -56,23 +59,27 @@ class Profile extends React.Component {
 
   render () {
       return (
-        <div className="profile-container">
-            <ProfileCard 
-              displayProfileCard={this.state.displayProfileCard}
-              handlerUpdateProfileCard={this.handlerDisplayProfileCard}
-              username={this.state.username}
-              userEmail={this.state.userEmail}
-              userPicture={this.state.userPicture}
-            />
-            {this.state.databaseAllRecipes.length>0 &&
-              <RecipesAccordion
-                    type='profile'
-                    defaultActiveKey={this.state.accordionKey}
-                    recipesArray={this.state.databaseAllRecipes}
-                    handlerFullRecipe={this.props.handlerFullRecipe}
-                    handlerUpdateAccordionKey={this.handlerUpdateAccordionKey}
-                  />}
-        </div>
+        <Container className="profile-container">
+          <Row>
+            <Col xs={6}>
+              <ProfileCard 
+                displayProfileCard={this.state.displayProfileCard}
+                handlerUpdateProfileCard={this.handlerDisplayProfileCard}
+                username={this.state.username}
+                userEmail={this.state.userEmail}
+                userPicture={this.state.userPicture}
+              />
+              {this.state.databaseAllRecipes.length>0 &&
+                <RecipesAccordion
+                      type='profile'
+                      defaultActiveKey={this.state.accordionKey}
+                      recipesArray={this.state.databaseAllRecipes}
+                      handlerFullRecipe={this.props.handlerFullRecipe}
+                      handlerUpdateAccordionKey={this.handlerUpdateAccordionKey}
+                    />}
+            </Col>
+          </Row>
+        </Container>
       );
   };
 }
