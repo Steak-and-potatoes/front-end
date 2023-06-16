@@ -5,9 +5,12 @@ import { FaMinus } from "react-icons/fa";
 import { nanoid } from "nanoid";
 import axios from "axios";
 import "./Search.css";
-import static_byIngredientsArray from "../../../Data/data-multiple-ingredients.json";
+// import static_byIngredientsArray from "../../../Data/data-multiple-ingredients.json";
 import RecipesAccordion from "../RecipesAccordion/RecipesAccordion.js";
 import LoadingSymbol from '../LoadingSymbol/LoadingSymbol.js'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 let SERVER = process.env.REACT_APP_SERVER;
 
@@ -17,11 +20,11 @@ export default class Search extends React.Component {
     this.state = {
       queryNumber: 2,
       searchByIngredients: [
-        { query: `${nanoid()}`, text: "Chicken" },
+        { query: `${nanoid()}`, text: "" },
         { query: `${nanoid()}`, text: "" }
       ],
 
-      byIngredientsArray: static_byIngredientsArray,
+      byIngredientsArray: [],
 
       accordionKey: null,
       displayLoadingSymbol:false
@@ -123,7 +126,10 @@ export default class Search extends React.Component {
 
     let formGroups = this.state.searchByIngredients.map((object, idx) => {
       return (
-        <Form.Group key={idx} className="mb-3" controlId={object.query}>
+        <Form.Group 
+          key={idx} 
+          className="mb-3 form-field-container" 
+          controlId={object.query}>
           <Form.Control
             type="text"
             name={object.query}
@@ -131,26 +137,41 @@ export default class Search extends React.Component {
             value={object.text}
             placeholder="ingredient..."
           />
-          <FaMinus onClick={() => this.handlerRemoveField(object.query)} />
+          <FaMinus className="fa-minus" onClick={() => this.handlerRemoveField(object.query)} />
         </Form.Group>
       );
     });
 
     return (
-      <div className="search-container">
-        <h4>Enter one ingredient per search field and click submit.</h4>
-        <Form onSubmit={this.handlerOnSubmit}>
-          {formGroups}
-          <div className="search-buttons">
-            <Button className="addButton" onClick={this.handlerAddSearchField}>
-              Add Ingredient
-            </Button>
-            <Button className="searchButton" type="submit">
-              Search
-            </Button>
-          </div>
-        </Form>
-        <hr />
+      <>
+        <Container className="search-container">
+          <Row className="justify-content-md-center">
+            <Col xs={8}>
+              <div className="form-container">
+                <h4 className="form-title">Enter one ingredient per search field and click submit.</h4>
+                <Form onSubmit={this.handlerOnSubmit}>
+                  {formGroups}
+                  <div className="search-buttons">
+                    <Button 
+                      className="edit-button" 
+                      onClick={this.handlerAddSearchField}>
+                      Add Ingredient
+                    </Button>
+                    <Button 
+                      className="save-button" 
+                      type="submit">
+                      Search
+                    </Button>
+                  </div>
+                </Form>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+        {this.state.byIngredientsArray.length>0&& <hr className="hr-search" />}
+    <Container className="search-container">
+      <Row className="justify-content-md-center">
+        <Col xs={10}>
         <div className="recipes">
           {this.state.byIngredientsArray.length !== 0 && !this.state.displayLoadingSymbol && (
             <RecipesAccordion
@@ -165,7 +186,10 @@ export default class Search extends React.Component {
           {this.state.displayLoadingSymbol &&
             <LoadingSymbol/>}
         </div>
-      </div>
+      </Col>
+      </Row>
+      </Container>
+      </>
     );
   }
 }
