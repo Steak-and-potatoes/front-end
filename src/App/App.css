@@ -9,6 +9,7 @@
 
 body {
     background-color: var(--tuscan);
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 .app-container {
