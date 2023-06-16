@@ -60,7 +60,7 @@ class Profile extends React.Component {
   render () {
       return (
         <Container className="profile-container">
-          <Row>
+          <Row className="justify-content-md-center">
             <Col xs={6}>
               <ProfileCard 
                 displayProfileCard={this.state.displayProfileCard}
@@ -69,6 +69,10 @@ class Profile extends React.Component {
                 userEmail={this.state.userEmail}
                 userPicture={this.state.userPicture}
               />
+            </Col>
+          </Row>
+          <Row className="justify-content-md-center">
+            <Col xs={10}>
               {this.state.databaseAllRecipes.length>0 &&
                 <RecipesAccordion
                       type='profile'

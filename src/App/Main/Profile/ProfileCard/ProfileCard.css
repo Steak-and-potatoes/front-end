@@ -20,3 +20,7 @@
 .profile-card-button{
   align-self:center;
 }
+
+.profile-picture {
+  object-fit:cover;
+}
