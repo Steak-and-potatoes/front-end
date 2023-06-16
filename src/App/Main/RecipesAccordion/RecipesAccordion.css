@@ -1,0 +1,28 @@
+.recipe-accordion {
+  border:2px solid var(--swamp-city);
+  border-radius:9px;
+}
+
+.recipe-accordion-item-body{
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.recipe-accordion-item-text{
+  display:flex;
+  flex-direction:column;
+  flex-wrap:nowrap;
+  justify-content:center;
+  align-items:center;
+  margin:0 0 0 1em;
+}
+
+.recipe-accordion-image {
+  border-radius:1em;
+  border:2px solid var(--swamp-city);
+  max-width:75%;
+  object-fit:cover;
+  max-height:20em;
+}

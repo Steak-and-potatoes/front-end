@@ -7,7 +7,7 @@ import Profile from './Profile/Profile.js';
 import {Routes, Route} from 'react-router-dom';
 import axios from 'axios';
 import ErrorModal from './ErrorModal/ErrorModal.js';
-import static_fullRecipe from '../../Data/data-by-id.json';
+import placeholderFullRecipe from '../../Data/recipe-placeholder.json';
 import {useNavigate} from 'react-router-dom';
 import AttributionModal from './AttributionModal/AttributionModal.js';
 import {useAuth0} from '@auth0/auth0-react';
@@ -18,7 +18,7 @@ let SERVER = process.env.REACT_APP_SERVER;
 function Main(props) {
   let [state,setState] = React.useState({
     fullRecipeID:null,
-    fullRecipe:{},
+    fullRecipe:placeholderFullRecipe,
     displayError:false,
     error:null,
     displayAttribution:false,
