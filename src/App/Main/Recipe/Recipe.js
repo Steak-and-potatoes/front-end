@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import "./Recipe.css";
 import { withAuth0 } from "@auth0/auth0-react";
 import placeholderFullRecipe from "../../../Data/recipe-placeholder.json";
+import RecipeEditForm from "./RecipeEditForm";
 import axios from "axios";
 import LoadingSymbol from "../LoadingSymbol/LoadingSymbol.js";
 import Container from 'react-bootstrap/Container';
@@ -25,6 +26,7 @@ class Recipe extends React.Component {
       userEmail: "",
       userPicture: "",
       displayLoading: false,
+      displayEditForm: false,
     };
   }
 
@@ -95,6 +97,22 @@ class Recipe extends React.Component {
   };
 
   handlerDisplaySaveButton = () => {
+    if (this.props.auth0.isAuthenticated && !this.state.fullRecipe._id && !this.state.displayLoading) {
+      return <Button
+        onClick={this.handlerSaveRecipe}
+        variant="primary">
+        Save Recipe
+      </Button>
+    } else if (this.props.auth0.isAuthenticated && !this.state.fullRecipe._id && this.state.displayLoading) {
+      return <LoadingSymbol />
+    }
+  }
+
+  // edit/update funcitonality
+
+  handlerEditRecipe = () => {
+    if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id) {
+      this.setState({ displayEditForm: true })
     if (
       this.props.auth0.isAuthenticated &&
       !this.state.fullRecipe._id &&
@@ -120,6 +138,38 @@ class Recipe extends React.Component {
   };
 
   handlerDisplayEditButton = () => {
+    if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id && !this.state.displayLoading) {
+      return <Button
+        onClick={this.handlerEditRecipe}
+        variant="secondary">
+        Edit Recipe
+      </Button>
+    } else if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id && this.state.displayLoading) {
+      return <LoadingSymbol />
+    }
+  }
+
+  // delete functionality
+
+  handlerDeleteRecipe = () => {
+    if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id) {
+      this.setState({ displayLoading: true })
+
+      let config = {
+        baseURL: process.env.REACT_APP_SERVER,
+        url: `/deleteRecipe/${this.state.fullRecipe._id}`,
+        method: 'delete'
+      }
+
+      axios(config)
+        .then(res => {
+          this.props.handlerFullRecipe("", placeholderFullRecipe);
+          this.setState({ fullRecipe: placeholderFullRecipe, displayLoading: false });
+        })
+        .catch(err => {
+          this.setState({ displayLoading: false });
+          this.props.handlerUpdateError(true, err.message);
+        })
     if (
       this.props.auth0.isAuthenticated &&
       this.state.fullRecipe._id &&
@@ -142,6 +192,14 @@ class Recipe extends React.Component {
   };
 
   handlerDisplayDeleteButton = () => {
+    if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id && !this.state.displayLoading) {
+      return <Button
+        onClick={this.handlerDeleteRecipe}
+        variant="warning">
+        Delete Recipe
+      </Button>
+    } else if (this.props.auth0.isAuthenticated && this.state.fullRecipe._id && this.state.displayLoading) {
+      return <LoadingSymbol />
     if (
       this.props.auth0.isAuthenticated &&
       this.state.fullRecipe._id &&

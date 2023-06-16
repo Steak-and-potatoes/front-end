@@ -46,3 +46,12 @@
   justify-content:space-evenly;
 }
 
+  /* edit form */
+
+  .card-body form {
+    width: 100%;
+  }
+
+  .card-body h5{
+    font-family: fantasy;
+  }
