@@ -1,8 +1,13 @@
 .search-container{
+    background-image: url(../../Images/bokchoy.jpg);
+    border-radius: 10px;
+    padding-top: 5%;
+    padding-bottom: 5%;
     margin-top: 1rem;
 }
 
 .form-title {
+    color: aliceblue;
     margin:0 0 0.5em 0.25em;
 }
 .form-field-container {
@@ -13,6 +18,7 @@
 }
 
 .fa-minus {
+    color: aliceblue;
     margin: 0 0 0 1em;
 }
 
