@@ -34,15 +34,20 @@ function Main(props) {
           axios.get(url)
             .then(res => {
               // console.log(res.data.email)
-              navigate('/recipe');
               setState({fullRecipeID:id,fullRecipe:res.data,displayError:false,error:null});
             })
+            .then(res => navigate('/recipe'))
             .catch(err => handlerUpdateError(true,err.message))
       }
-    if (object) {
-        navigate('/recipe');
+    if (typeof(id)==="string" && object) {
         setState({fullRecipeID:id,fullRecipe:object})
+        navigate('/recipe');
       }
+    if (id===false && object){
+      // console.log('triggered');
+      setState({fullRecipeID:null,fullRecipe:placeholderFullRecipe})
+    }
+
   }
 
   function handlerUpdateError(bool,errorMessage=null) {
@@ -52,6 +57,8 @@ function Main(props) {
   function handlerAttribution(object, bool) {
     setState({ attributionObject:object,displayAttribution: bool });
   };
+
+  // console.log(state.fullRecipe);
 
   return (
     <div className="main-container">
