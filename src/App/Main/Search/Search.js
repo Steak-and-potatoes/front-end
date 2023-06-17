@@ -27,7 +27,7 @@ export default class Search extends React.Component {
       byIngredientsArray: [],
 
       accordionKey: null,
-      displayLoadingSymbol:false
+      displayLoadingSymbol: false
     };
   }
 
@@ -74,7 +74,7 @@ export default class Search extends React.Component {
 
   handlerOnSubmit = (event) => {
     event.preventDefault();
-    this.setState({displayLoadingSymbol:true});
+    this.setState({ displayLoadingSymbol: true });
     try {
       // let regex = /[0-9!@#$%^&*(),.?":{}|<>]/g;
       let regex = /^[a-zA-Z ]*$/;
@@ -85,7 +85,7 @@ export default class Search extends React.Component {
           return acc;
         }, []);
       if (arrayQueries.length === 0) {
-        this.setState({displayLoadingSymbol:false});
+        this.setState({ displayLoadingSymbol: false });
         this.props.handlerUpdateError(
           true,
           "Must submit one or more ingredients without any digits(123) or special characters(%$&*)."
@@ -100,23 +100,24 @@ export default class Search extends React.Component {
           .get(url)
           .then((res) => {
             if (res.data.meals === null) {
-              this.setState({ byIngredientsArray: [], displayLoadingSymbol:false });
+              this.setState({ byIngredientsArray: [], displayLoadingSymbol: false });
               this.props.handlerUpdateError(true, "No search results returned. Please consider ingredient spelling, number of ingredients, and unusual combinations that might not return any results.");
             } else {
               this.props.handlerUpdateError(false, null);
-              this.setState({ byIngredientsArray: res.data.meals, displayLoadingSymbol:false });
-              this.props.handlerFullRecipe(false,placeholderFullRecipe);
+              this.setState({ byIngredientsArray: res.data.meals, displayLoadingSymbol: false });
+              this.props.handlerFullRecipe(false, placeholderFullRecipe);
             }
           })
           .catch((error) => {
-            this.setState({displayLoadingSymbol:false});
-            this.props.handlerUpdateError(true, error.message);});
-            this.props.handlerFullRecipe(false,placeholderFullRecipe);
+            this.setState({ displayLoadingSymbol: false });
+            this.props.handlerUpdateError(true, error.message);
+          });
+        this.props.handlerFullRecipe(false, placeholderFullRecipe);
       }
     } catch (error) {
-      this.setState({displayLoadingSymbol:false});
+      this.setState({ displayLoadingSymbol: false });
       this.props.handlerUpdateError(true, error.message);
-      this.props.handlerFullRecipe(false,placeholderFullRecipe);
+      this.props.handlerFullRecipe(false, placeholderFullRecipe);
     }
   };
 
@@ -129,9 +130,9 @@ export default class Search extends React.Component {
 
     let formGroups = this.state.searchByIngredients.map((object, idx) => {
       return (
-        <Form.Group 
-          key={idx} 
-          className="mb-3 form-field-container" 
+        <Form.Group
+          key={idx}
+          className="mb-3 form-field-container"
           controlId={object.query}>
           <Form.Control
             type="text"
@@ -155,13 +156,13 @@ export default class Search extends React.Component {
                 <Form onSubmit={this.handlerOnSubmit}>
                   {formGroups}
                   <div className="search-buttons">
-                    <Button 
-                      className="edit-button" 
+                    <Button
+                      className="edit-button"
                       onClick={this.handlerAddSearchField}>
                       Add Ingredient
                     </Button>
-                    <Button 
-                      className="save-button" 
+                    <Button
+                      className="save-button"
                       type="submit">
                       Search
                     </Button>
@@ -171,27 +172,28 @@ export default class Search extends React.Component {
             </Col>
           </Row>
         </Container>
-        {this.state.byIngredientsArray.length>0&& <hr className="hr-search" />}
-    <Container className="search-container">
-      <Row className="justify-content-md-center">
-        <Col xs={10}>
-        <div className="recipes">
-          {this.state.byIngredientsArray.length !== 0 && !this.state.displayLoadingSymbol && (
-            <RecipesAccordion
-              type="search"
-              defaultActiveKey={this.state.accordionKey}
-              recipesArray={this.state.byIngredientsArray}
-              handlerFullRecipe={this.props.handlerFullRecipe}
-              handlerUpdateAccordionKey={this.handlerUpdateAccordionKey}
-            />
-          )}
+        {this.state.byIngredientsArray.length > 0 && <hr className="hr-search" />}
+        <Container className="search-container">
+          <h3>Recipes</h3>
+          <Row className="justify-content-md-center">
+            <Col xs={10}>
+              <div className="recipes">
+                {this.state.byIngredientsArray.length !== 0 && !this.state.displayLoadingSymbol && (
+                  <RecipesAccordion
+                    type="search"
+                    defaultActiveKey={this.state.accordionKey}
+                    recipesArray={this.state.byIngredientsArray}
+                    handlerFullRecipe={this.props.handlerFullRecipe}
+                    handlerUpdateAccordionKey={this.handlerUpdateAccordionKey}
+                  />
+                )}
 
-          {this.state.displayLoadingSymbol &&
-            <LoadingSymbol/>}
-        </div>
-      </Col>
-      </Row>
-      </Container>
+                {this.state.displayLoadingSymbol &&
+                  <LoadingSymbol />}
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </>
     );
   }
