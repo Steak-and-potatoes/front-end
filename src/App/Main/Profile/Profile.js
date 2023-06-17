@@ -75,7 +75,7 @@ class Profile extends React.Component {
             <Col xs={10}>
               {this.state.databaseAllRecipes.length>0 &&
                 <>
-                  <h3>Cookbook:</h3>
+                  <h3 className="cookbook-title">Cookbook:</h3>
                   <RecipesAccordion
                       type='profile'
                       defaultActiveKey={this.state.accordionKey}
