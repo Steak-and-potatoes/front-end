@@ -74,13 +74,16 @@ class Profile extends React.Component {
           <Row className="justify-content-md-center">
             <Col xs={10}>
               {this.state.databaseAllRecipes.length>0 &&
-                <RecipesAccordion
+                <>
+                  <h3>Cookbook:</h3>
+                  <RecipesAccordion
                       type='profile'
                       defaultActiveKey={this.state.accordionKey}
                       recipesArray={this.state.databaseAllRecipes}
                       handlerFullRecipe={this.props.handlerFullRecipe}
                       handlerUpdateAccordionKey={this.handlerUpdateAccordionKey}
-                    />}
+                    />
+                </>}
             </Col>
           </Row>
         </Container>
