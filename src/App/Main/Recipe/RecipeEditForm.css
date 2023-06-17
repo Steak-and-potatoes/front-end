@@ -1,0 +1,21 @@
+.card-head-title {
+  text-align:center;
+}
+
+.ingredient-li {
+  list-style-type:none;
+}
+
+.ingredient-field {
+  display:flex;
+  flex-direction:row;
+  flex-wrap:nowrap;
+  align-items:center;
+  align-content:center;
+
+}
+
+.ingredient-control {
+  margin-left:1em;
+}
+

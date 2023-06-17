@@ -6,16 +6,12 @@ import { withAuth0 } from "@auth0/auth0-react";
 import placeholderFullRecipe from "../../../Data/recipe-placeholder.json";
 import axios from "axios";
 import LoadingSymbol from "../LoadingSymbol/LoadingSymbol.js";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import RecipeEditForm from "./RecipeEditForm.js";
 
-let dogImageAttribution = {
-  creator: "Camylla Battani",
-  image: "camylla-battani-JgdgKvYgiwI-unsplash.jpg",
-  link: "https://unsplash.com/@camylla93",
-};
+
 
 class Recipe extends React.Component {
   constructor(props) {
@@ -105,7 +101,9 @@ class Recipe extends React.Component {
       return (
         <Button
           className="recipe-buttons save-button"
-          onClick={this.handlerSaveRecipe} variant="primary">
+          onClick={this.handlerSaveRecipe}
+          variant="primary"
+        >
           Save Recipe
         </Button>
       );
@@ -114,10 +112,7 @@ class Recipe extends React.Component {
       !this.state.fullRecipe._id &&
       this.state.displayLoading
     ) {
-      return (
-        <LoadingSymbol />
-      )
-
+      return <LoadingSymbol />;
     }
   };
 
@@ -130,7 +125,9 @@ class Recipe extends React.Component {
       return (
         <Button
           className="recipe-buttons edit-button"
-          onClick={this.handlerEditRecipe} variant="secondary">
+          onClick={this.handlerEditRecipe}
+          variant="secondary"
+        >
           Edit Recipe
         </Button>
       );
@@ -162,10 +159,11 @@ class Recipe extends React.Component {
       return (
         <Button
           className="recipe-buttons delete-button"
-          onClick={this.handlerDeleteRecipe} variant="warning">
+          onClick={this.handlerDeleteRecipe}
+          variant="warning"
+        >
           Delete Recipe
         </Button>
-
       );
     } else if (
       this.props.auth0.isAuthenticated &&
@@ -177,7 +175,7 @@ class Recipe extends React.Component {
   };
 
   render() {
-    console.log(this.state.fullRecipe);
+    console.log(this.state.fullRecipe.strMealThumb);
     // console.log(this.props.auth0.isAuthenticated);
     return (
       this.state.displayEditForm ?
@@ -192,21 +190,11 @@ class Recipe extends React.Component {
               <Col className="recipe-col" xs={10}>
                 <Card 
                   className="recipe-card">
-                  {this.state.fullRecipe.strMealThumb === "dogDonuteImage" ? (
-                    <Card.Img
-                      className="recipe-card-image"
-                      variant="top"
-                      onClick={() =>
-                        this.props.handlerAttribution(dogImageAttribution, true)
-                      }
-                      src={require("../../Images/camylla-battani-JgdgKvYgiwI-unsplash.jpg")}
-                    />
-                  ) : (
+  
                     <Card.Img 
                       variant="top" 
                       className="recipe-card-image"
                       src={this.state.fullRecipe.strMealThumb||""} />
-                  )}
 
                 <Card.Body
                   className="recipe-body">
