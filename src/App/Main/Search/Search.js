@@ -174,7 +174,7 @@ export default class Search extends React.Component {
         </Container>
         {this.state.byIngredientsArray.length > 0 && <hr className="hr-search" />}
         <Container className="search-container">
-          <h3>Recipes</h3>
+          <h3 className="recipe-title">Recipes</h3>
           <Row className="justify-content-md-center">
             <Col xs={10}>
               <div className="recipes">
