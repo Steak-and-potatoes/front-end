@@ -3,3 +3,7 @@
   flex-direction:column;
   flex-wrap:nowrap;
 }
+
+.cookbook-title {
+  text-align:center;
+}
